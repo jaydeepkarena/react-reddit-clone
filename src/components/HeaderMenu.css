@@ -1,3 +1,7 @@
+/* @import url('https://fonts.googleapis.com/css?family=Caveat:700&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap'); /* for logo */
+@import url('https://fonts.googleapis.com/css?family=Boogaloo&display=swap'); /* for all headings */
+
 .header-menu-container {
   width: 100vw;
   display: flex;
@@ -8,21 +12,29 @@
   color: white;
   padding: 5px;
   flex:1;
+  font-family: Boogaloo;
+  font-size: 1.5rem;
 }
 
 .logo {
-  border: 1px solid white;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-right: auto;
+  font-size: 2rem;
+  font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: capitalize;
 }
 
 .reddit-logo {
-  height: 25px;
+  height: 35px;
   padding-right: 5px;
 }
 
 .user-name, .crate-post {
   padding-right: 10px;
+}
+
+a {
+  color :white;
 }
