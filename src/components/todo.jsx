@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import uuid from 'uuid/v4';
 
 let initialTodos = [
@@ -19,41 +19,55 @@ let initialTodos = [
   }
 ];
 
+const todosReducer = (state, action) => {
+  switch (action.type) {
+    case 'DONE':
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: true };
+        } else {
+          return todo;
+        }
+      });
+    case 'UNDO':
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: false };
+        } else {
+          return todo;
+        }
+      });
+    case 'ADD':
+      return [...state, { id: uuid(), task: action.task, complete: false }];
+    default:
+      break;
+  }
+};
+
 const TodoDemo = () => {
-  const [todos, setTodo] = useState(initialTodos);
+  const [state, dispatch] = useReducer(todosReducer, initialTodos);
   const [task, setTask] = useState('');
 
   const addTodo = e => {
     if (task) {
-      setTodo(todos.concat({ id: uuid(), task, complete: false }));
+      dispatch({ type: 'ADD', task });
     }
     setTask('');
     e.preventDefault();
-  };
-
-  const handleCheckedChange = id => {
-    setTodo(
-      todos.map(todo => {
-        if (todo.id == id) {
-          return { ...todo, complete: !todo.complete };
-        } else {
-          return todo;
-        }
-      })
-    );
-    console.log(todos)
   };
 
   return (
     <>
       <h1>useState Demo</h1>
       <ul>
-        {todos.map(todo => (
+        {state.map(todo => (
           <li key={todo.id}>
             <input
               type="checkbox"
               checked={todo.complete}
-              onChange={() => handleCheckedChange(todo.id)}
+              onChange={() =>
+                dispatch({ type: `${todo.complete ? 'UNDO' : 'DONE'}`, id: todo.id })
+              }
             />
             <label> {todo.task}</label>
           </li>
