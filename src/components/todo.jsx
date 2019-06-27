@@ -63,6 +63,7 @@ const TodoDemo = () => {
   const [task, setTask] = useState('');
 
   const addTodo = e => {
+    console.log(todos)
     if (task) {
       dispatchTodos({ type: 'ADD', task });
     }
@@ -70,7 +71,7 @@ const TodoDemo = () => {
     e.preventDefault();
   };
 
-  const filteredTodos = todos.map(todo => {
+  const filteredTodos = todos.filter(todo => {
     if (filter === 'ALL') return true;
     else if (filter === 'COMPLETE' && todo.complete) return true;
     else if (filter === 'INCOMPLETE' && !todo.complete) return true;
@@ -79,15 +80,17 @@ const TodoDemo = () => {
 
   return (
     <>
-      <button onClick={() => dispatchFilter({ type: 'SHOW_ALL' })}>All</button>
-      <button onClick={() => dispatchFilter({ type: 'SHOW_COMPLETE' })}>
-        COMPLETE
-      </button>
-      <button onClick={() => dispatchFilter({ type: 'SHOW_INCOMPLETE' })}>
-        INCOMPLETE
-      </button>
+      <div>
+        <button onClick={() => dispatchFilter({ type: 'SHOW_ALL' })}>All</button>
+        <button onClick={() => dispatchFilter({ type: 'SHOW_COMPLETE' })}>
+          COMPLETE
+        </button>
+        <button onClick={() => dispatchFilter({ type: 'SHOW_INCOMPLETE' })}>
+          INCOMPLETE
+        </button>
+      </div>
       <ul>
-        {filteredTodos.filter(todo => (
+        {filteredTodos.map(todo => (
           <li key={todo.id}>
             <input
               type="checkbox"
