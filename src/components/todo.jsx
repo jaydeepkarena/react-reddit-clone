@@ -44,29 +44,59 @@ const todosReducer = (state, action) => {
   }
 };
 
+const filterReducer = (state, action) => {
+  switch (action.type) {
+    case 'SHOW_ALL':
+      return 'ALL';
+    case 'SHOW_COMPLETE':
+      return 'COMPLETE';
+    case 'SHOW_INCOMPLETE':
+      return 'INCOMPLETE';
+    default:
+      throw new Error(`Invalid action type - ${action.type}`);
+  }
+};
+
 const TodoDemo = () => {
-  const [state, dispatch] = useReducer(todosReducer, initialTodos);
+  const [todos, dispatchTodos] = useReducer(todosReducer, initialTodos);
+  const [filter, dispatchFilter] = useReducer(filterReducer, 'ALL');
   const [task, setTask] = useState('');
 
   const addTodo = e => {
     if (task) {
-      dispatch({ type: 'ADD', task });
+      dispatchTodos({ type: 'ADD', task });
     }
     setTask('');
     e.preventDefault();
   };
 
+  const filteredTodos = todos.map(todo => {
+    if (filter === 'ALL') return true;
+    else if (filter === 'COMPLETE' && todo.complete) return true;
+    else if (filter === 'INCOMPLETE' && !todo.complete) return true;
+    return false;
+  });
+
   return (
     <>
-      <h1>useState Demo</h1>
+      <button onClick={() => dispatchFilter({ type: 'SHOW_ALL' })}>All</button>
+      <button onClick={() => dispatchFilter({ type: 'SHOW_COMPLETE' })}>
+        COMPLETE
+      </button>
+      <button onClick={() => dispatchFilter({ type: 'SHOW_INCOMPLETE' })}>
+        INCOMPLETE
+      </button>
       <ul>
-        {state.map(todo => (
+        {filteredTodos.filter(todo => (
           <li key={todo.id}>
             <input
               type="checkbox"
               checked={todo.complete}
               onChange={() =>
-                dispatch({ type: `${todo.complete ? 'UNDO' : 'DONE'}`, id: todo.id })
+                dispatchTodos({
+                  type: `${todo.complete ? 'UNDO' : 'DONE'}`,
+                  id: todo.id
+                })
               }
             />
             <label> {todo.task}</label>
