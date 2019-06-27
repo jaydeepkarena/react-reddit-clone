@@ -1,5 +1,6 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, createContext } from 'react';
 import uuid from 'uuid/v4';
+import Filter from './Filter';
 
 let initialTodos = [
   {
@@ -18,6 +19,8 @@ let initialTodos = [
     complete: true
   }
 ];
+
+const FilterContext = createContext(null);
 
 const todosReducer = (state, action) => {
   switch (action.type) {
@@ -63,7 +66,7 @@ const TodoDemo = () => {
   const [task, setTask] = useState('');
 
   const addTodo = e => {
-    console.log(todos)
+    console.log(todos);
     if (task) {
       dispatchTodos({ type: 'ADD', task });
     }
@@ -80,15 +83,9 @@ const TodoDemo = () => {
 
   return (
     <>
-      <div>
-        <button onClick={() => dispatchFilter({ type: 'SHOW_ALL' })}>All</button>
-        <button onClick={() => dispatchFilter({ type: 'SHOW_COMPLETE' })}>
-          COMPLETE
-        </button>
-        <button onClick={() => dispatchFilter({ type: 'SHOW_INCOMPLETE' })}>
-          INCOMPLETE
-        </button>
-      </div>
+      <FilterContext value={dispatchFilter}>
+        <Filter />
+      </FilterContext>
       <ul>
         {filteredTodos.map(todo => (
           <li key={todo.id}>
@@ -121,3 +118,4 @@ const TodoDemo = () => {
 };
 
 export default TodoDemo;
+export { FilterContext };
