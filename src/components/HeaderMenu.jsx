@@ -5,7 +5,6 @@ import { UsersContext } from '../App';
 
 function HeaderMenu() {
   const users = useContext(UsersContext);
-  console.log(users)
   return (
     <>
       <div className="header-menu-container">
