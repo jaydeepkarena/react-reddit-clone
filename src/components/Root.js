@@ -10,17 +10,17 @@ import NotFound from './NotFound';
 const Root = () => {
   return (
     <div className="main-container">
-      <HeaderMenu />
-      <div>
-        <Router>
+      <Router>
+        <HeaderMenu />
+        <div>
           <Switch>
             <Route path="/" component={App} exact />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
             <Route component={NotFound} />
           </Switch>
-        </Router>
-      </div>
+        </div>
+      </Router>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/images/reddit_logo.svg';
 import './HeaderMenu.css';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom'
 
 const HeaderMenu = props => {
   return (
@@ -17,12 +18,12 @@ const HeaderMenu = props => {
           </a>
         ) : (
           <>
-            <a href="login" className="login">
+            <Link to="/Login" className="login">
               Login
-            </a>
-            <a href="/signup" className="signup">
+            </Link>
+            <Link to="/signup" className="signup">
               SignUp
-            </a>
+            </Link>
           </>
         )}
         <div className="user-name">Welcome, {props.name} </div>
