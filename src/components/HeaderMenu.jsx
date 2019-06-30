@@ -12,13 +12,18 @@ const HeaderMenu = props => {
           <span>Reddit</span>
         </div>
         {props.id ? (
-          <a href="x" className="crate-post">
+          <a href="/new-post" className="crate-post">
             Create Post
           </a>
         ) : (
-          <a href="x" className="crate-post">
-            Login
-          </a>
+          <>
+            <a href="login" className="login">
+              Login
+            </a>
+            <a href="/signup" className="signup">
+              SignUp
+            </a>
+          </>
         )}
         <div className="user-name">Welcome, {props.name} </div>
       </div>
