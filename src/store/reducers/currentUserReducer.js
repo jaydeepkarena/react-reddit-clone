@@ -1,9 +1,9 @@
 import * as actionTypes from '../actionTypes';
 
 const initialState = {
-  currentUserId: '',
-  currentUserEmail: '',
-  currentUserName: 'Guest'
+  id: '',
+  email: '',
+  name: 'Guest'
 };
 
 const currentUserReducer = (state = initialState, action) => {
