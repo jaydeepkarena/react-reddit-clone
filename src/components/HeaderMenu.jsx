@@ -12,7 +12,7 @@ function HeaderMenu() {
           <img src={logo} alt="logo here" className="reddit-logo" />
           <span>Reddit</span>
         </div>
-        <a href="" className="crate-post">
+        <a href="x" className="crate-post">
           Create Post
         </a>
         <div className="user-name">Welcome, {users[0].name} </div>
