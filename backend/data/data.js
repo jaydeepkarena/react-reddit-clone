@@ -1,5 +1,8 @@
+const uuid = require('uuid/v4');
+const id1 = uuid();
+const id2 = uuid();
 const users= {
-  '1': {
+  [id1]: {
     name: 'jaydeep karena',
     username:'jaydeep-karena',
     email: 'jaydeep7karena7@gmail.com',
@@ -7,9 +10,10 @@ const users= {
     avatar:'',
     dateofjoin: new Date(),
     veryfied: true,
-    active: true
+    active: true,
+    id: id1
   },
-  '2': {
+  [id2]: {
     name: 'parul karena',
     username:'parul-karena',
     email: 'paruljay7@gmail.com',
@@ -17,7 +21,8 @@ const users= {
     avatar:'',
     dateofjoin: new Date(),
     veryfied: false,
-    active: false
+    active: false,
+    id: id2
   },
 }
 

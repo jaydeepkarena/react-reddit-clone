@@ -2,19 +2,25 @@ const express = require('express');
 const app = express();
 const users = require('./data/data');
 const Joi = require('@hapi/joi');
+const uuid = require('uuid/v4');
 
-app.get('/auth', (req, res) => {
+app.use(express.json());
+
+app.get('/api/auth', (req, res) => {
   res.send(users);
 });
 
-app.post('/signup', (req, res) => {
-  const { error } = validateUser(req.params);
-  console.log(error);
-  if (error) {
-    res.send('ERROR');
-  }
-
-  res.send(users);
+app.post('/api/signup', (req, res) => {
+  return res.send('Coming soon....');
+  // const { error } = validateUser(req.body);
+  // console.log(error.details[0].message);
+  // if (error) {
+  //   return res.send(error.details[0].message);
+  // }
+  // const newId = uuid();
+  // const newUser = { [newId]: { ...req.body, id: newId } };
+  // users = { ...users, ...newUser };
+  // res.send(newuser);
 });
 
 const PORT = process.env.PORT || 8080;
@@ -35,5 +41,5 @@ const validateUser = user => {
       .max(255)
   };
 
-  return schema.validate(user);
+  return Joi.validate(user, schema);
 };
