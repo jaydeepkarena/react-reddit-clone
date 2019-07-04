@@ -4,7 +4,7 @@ import './HeaderMenu.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const HeaderMenu = props => {
+const HeaderMenu = ({ id, name }) => {
   return (
     <>
       <div className="header-menu-container">
@@ -12,30 +12,30 @@ const HeaderMenu = props => {
           <img src={logo} alt="logo here" className="reddit-logo" />
           <span>Reddit</span>
         </div>
-        {props.id ? (
+        {id ? (
           <a href="/new-post" className="crate-post">
             Create Post
           </a>
         ) : (
           <>
             <Link to="/Login" className="login">
-              Login {props.id}
+              Login {id}
             </Link>
             <Link to="/signup" className="signup">
               SignUp
             </Link>
           </>
         )}
-        <div className="user-name">Welcome, {props.name} </div>
+        <div className="user-name">Welcome, {name} </div>
       </div>
     </>
   );
 };
 
-const mapStateToProps = ({ currentUserId, currentUserName, currentUserEmail }) => ({
-  id: currentUserId,
-  name: currentUserName,
-  email: currentUserEmail
+const mapStateToProps = state => ({
+  id: state.data.currentUserId,
+  name: state.data.currentUserName,
+  email: state.data.currentUserEmail
 });
 
-export default connect(mapStateToProps,null)(HeaderMenu);
+export default connect(mapStateToProps)(HeaderMenu);

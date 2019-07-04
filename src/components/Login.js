@@ -6,10 +6,12 @@ const Login = props => {
   const emailRef = useRef('');
   const passwordRef = useRef('');
 
-  const Login = (e) => {
+  const Login = e => {
     e.preventDefault();
+
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
+
     props.authUser(email, password);
   };
 

@@ -17,26 +17,20 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOGIN:
-      console.log(state);
       const users = Object.keys(state.users);
       const { email, password } = action.payload;
       for (const userId of users) {
-        const dbUser = state.users[userId];
+        const dbUser = { ...state.users[userId] };
         if (dbUser.email === email && dbUser.password === password) {
-          console.log('user found');
-          console.log(dbUser);
           const newState = {
-            ...state,
+            users: { ...state.users },
             currentUserId: dbUser.id,
             currentUserName: dbUser.name,
-            currentUserEmail: email
+            currentUserEmail: dbUser.email
           };
-          console.log('new state');
-          console.log(newState);
-          return newState;
+          return { ...newState };
         }
       }
-      console.log('user not found');
       return state;
     default:
       return state;
