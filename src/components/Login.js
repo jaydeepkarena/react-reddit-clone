@@ -6,7 +6,8 @@ const Login = props => {
   const emailRef = useRef('');
   const passwordRef = useRef('');
 
-  const Login = () => {
+  const Login = (e) => {
+    e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     props.authUser(email, password);
@@ -19,7 +20,7 @@ const Login = props => {
       <input type="text" name="email" id="email" ref={emailRef} />
       <label htmlFor="password">Password:</label>
       <input type="text" name="password" id="password" ref={passwordRef} />
-      <button onClick={Login}>Login</button>
+      <input type="submit" onClick={Login} value="Login" />
     </>
   );
 };

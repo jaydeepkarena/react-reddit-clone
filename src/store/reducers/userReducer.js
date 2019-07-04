@@ -10,7 +10,7 @@ const initialState = {
     }
   },
   currentUserId: '',
-  currentUserName: '',
+  currentUserName: 'Guest',
   currentUserEmail: ''
 };
 

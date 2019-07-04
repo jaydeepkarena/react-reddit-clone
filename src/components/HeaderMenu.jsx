@@ -19,7 +19,7 @@ const HeaderMenu = props => {
         ) : (
           <>
             <Link to="/Login" className="login">
-              Login
+              Login {props.id}
             </Link>
             <Link to="/signup" className="signup">
               SignUp
@@ -32,14 +32,10 @@ const HeaderMenu = props => {
   );
 };
 
-const mapStateToProps = ({ currentUserId, currentUserName, currentUserEmail }) => {
-  return {
-    id: currentUserId,
-    name: currentUserName,
-    email: currentUserEmail
-  };
-};
+const mapStateToProps = ({ currentUserId, currentUserName, currentUserEmail }) => ({
+  id: currentUserId,
+  name: currentUserName,
+  email: currentUserEmail
+});
 
-export default connect(
-  mapStateToProps,
-)(HeaderMenu);
+export default connect(mapStateToProps,null)(HeaderMenu);
