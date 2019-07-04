@@ -3,7 +3,6 @@ import logo from '../assets/images/reddit_logo.svg';
 import './HeaderMenu.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { LoginUser } from '../store/actions';
 
 const HeaderMenu = props => {
   return (
@@ -41,13 +40,6 @@ const mapStateToProps = ({ currentUserId, currentUserName, currentUserEmail }) =
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    LoginUser: (email, password) => dispatch(LoginUser(email, password))
-  };
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
 )(HeaderMenu);
