@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../assets/images/reddit_logo.svg';
 import './HeaderMenu.css';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const HeaderMenu = props => {
   return (
@@ -32,11 +32,11 @@ const HeaderMenu = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ currentUserId, currentUserName, currentUserEmail }) => {
   return {
-    id: state.currentUser.id,
-    email: state.currentUser.name,
-    name: state.currentUser.name
+    id: currentUserId,
+    name: currentUserName,
+    email: currentUserEmail
   };
 };
 

@@ -4,9 +4,9 @@ const Login = props => {
   return (
     <>
       <h2>Login</h2>
-      <lable for="username">Username:</lable>
+      <label htmlFor="username">Username:</label>
       <input type="text" name="username" id="username" />
-      <lable for="password">Password:</lable>
+      <label htmlFor="password">Password:</label>
       <input type="text" name="password" id="password" />
       <button>Login</button>
     </>

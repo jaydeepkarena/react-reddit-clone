@@ -1,20 +1,18 @@
-import * as actionTypes from '../actionTypes';
+import { USER_LOGIN } from '../actionTypes';
 
 const initialState = {
-  users: {}
+  users: {},
+  currentUserId: '',
+  currentUserName: '',
+  currentUserEmail: ''
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.key) {
-    case actionTypes.ADD_USER:
-      if (Object.values(state.users).some(u => u.email === action.email))
-        throw new Error('User already available with this email id');
+    case USER_LOGIN:
+      const user = Object.keys(state);
+      console.log(user);
       return state;
-    // case actionTypes.AUTH:
-    //     if (Object.values(state.users).some(u => u.email === action.email && u.password === action.password))
-    //     {
-
-    //     }
     default:
       return state;
   }
