@@ -1,13 +1,19 @@
 const express = require('express');
 const app = express();
-const users = require('./data/data');
-const Joi = require('@hapi/joi');
-const uuid = require('uuid/v4');
+const mongoose = require('mongoose');
+const { User } = require('./models/user');
+
+mongoose.connect('mongod://localhost:27017/react-reddit-clone', { useNewUrlParser: true });
 
 app.use(express.json());
 
-app.get('/api/auth', (req, res) => {
-  res.send(users);
+process.on('', (err) => console.log(err))
+
+app.post('/api/login', async (req, res) => {
+  const user = await User.findOne({ email: req.params.email, password: req.params.password });
+  if (user) return res.send('Login successful!');
+
+  res.status(400).send('Invalid email or password!');
 });
 
 app.post('/api/signup', (req, res) => {
@@ -25,21 +31,3 @@ app.post('/api/signup', (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Listening on ${PORT}...`));
-
-const validateUser = user => {
-  const schema = {
-    name: Joi.string()
-      .required()
-      .min(5)
-      .max(255),
-    email: Joi.string()
-      .required()
-      .email(),
-    password: Joi.string()
-      .required()
-      .min(5)
-      .max(255)
-  };
-
-  return Joi.validate(user, schema);
-};
