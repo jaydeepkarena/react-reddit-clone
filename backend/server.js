@@ -3,12 +3,18 @@ const app = express();
 const mongoose = require('mongoose');
 const { User, validateUser } = require('./models/user');
 
+require('express-async-errors');
+
 mongoose
   .connect('mongodb://localhost/react-reddit-clone', { useNewUrlParser: true })
   .then(() => console.log('Successfully connected to MongoDb...'))
   .catch(err => console.log(err));
 
 app.use(express.json());
+app.use(function(err, req, res, next) {
+  console.log('ERRRORORORORORR : ', err);
+  next();
+});
 
 process.on('unhandledRejection', err => console.log(err));
 
