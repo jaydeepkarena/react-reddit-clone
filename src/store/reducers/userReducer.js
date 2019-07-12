@@ -17,21 +17,22 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOGIN:
-      const users = Object.keys(state.users);
-      const { email, password } = action.payload;
-      for (const userId of users) {
-        const dbUser = { ...state.users[userId] };
-        if (dbUser.email === email && dbUser.password === password) {
-          const newState = {
-            users: { ...state.users },
-            currentUserId: dbUser.id,
-            currentUserName: dbUser.name,
-            currentUserEmail: dbUser.email
-          };
-          return { ...newState };
-        }
-      }
-      return state;
+      // TODO: call API for user authentication
+      // const users = Object.keys(state.users);
+      // const { email, password } = action.payload;
+      // for (const userId of users) {
+      //   const dbUser = { ...state.users[userId] };
+      //   if (dbUser.email === email && dbUser.password === password) {
+      //     const newState = {
+      //       users: { ...state.users },
+      //       currentUserId: dbUser.id,
+      //       currentUserName: dbUser.name,
+      //       currentUserEmail: dbUser.email
+      //     };
+      //     return { ...newState };
+      //   }
+      // }
+      return { ...state, currentUserId: 'Test', currentUserName: 'Test' };
     default:
       return state;
   }

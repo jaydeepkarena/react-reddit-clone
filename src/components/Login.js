@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { LoginUser } from '../store/actions';
+import { Redirect } from 'react-router-dom';
 
 const Login = props => {
   const emailRef = useRef('');
@@ -15,6 +16,8 @@ const Login = props => {
     props.authUser(email, password);
   };
 
+  if (props.currentUserId) return <Redirect to="/" />;
+
   return (
     <>
       <h2>Login</h2>
@@ -27,6 +30,11 @@ const Login = props => {
   );
 };
 
+const mapStateToPros = state => ({
+  currentUserId: state.data.currentUserId,
+  currentUserName: state.data.currentUserName
+});
+
 const mapDispatchToProps = dispatch => ({
   authUser: (email, password) => {
     dispatch(LoginUser(email, password));
@@ -34,6 +42,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToPros,
   mapDispatchToProps
 )(Login);
