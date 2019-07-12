@@ -1,7 +1,27 @@
-import { USER_LOGIN } from '../actionTypes';
+import { USER_LOGIN, SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../actionTypes';
+
 export function LoginUser(email, password) {
   return {
     type: USER_LOGIN,
     payload: { email, password }
+  };
+}
+
+export function sentLoginRequest() {
+  return {
+    type: SENT_LOGIN_REQUEST
+  };
+}
+
+export function loginSuccessfull(data) {
+  return {
+    type: LOGIN_SUCCESS,
+    data
+  };
+}
+export function loginError(error) {
+  return {
+    type: LOGIN_ERROR,
+    error
   };
 }

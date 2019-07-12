@@ -1,4 +1,4 @@
-import { USER_LOGIN } from '../actionTypes';
+import { USER_LOGIN, SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../actionTypes';
 
 const initialState = {
   users: {
@@ -11,28 +11,22 @@ const initialState = {
   },
   currentUserId: '',
   currentUserName: 'Guest',
-  currentUserEmail: ''
+  currentUserEmail: '',
+  loginRequested: false,
+  loginError: ''
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_LOGIN:
-      // TODO: call API for user authentication
-      // const users = Object.keys(state.users);
-      // const { email, password } = action.payload;
-      // for (const userId of users) {
-      //   const dbUser = { ...state.users[userId] };
-      //   if (dbUser.email === email && dbUser.password === password) {
-      //     const newState = {
-      //       users: { ...state.users },
-      //       currentUserId: dbUser.id,
-      //       currentUserName: dbUser.name,
-      //       currentUserEmail: dbUser.email
-      //     };
-      //     return { ...newState };
-      //   }
-      // }
-      return { ...state, currentUserId: 'Test', currentUserName: 'Test' };
+    // case USER_LOGIN:
+    //   return { ...state, currentUserId: 'Test', currentUserName: 'Test' };
+    case SENT_LOGIN_REQUEST:
+      return { ...state, loginRequested: true };
+    case LOGIN_SUCCESS:
+      console.log('LOGIN SUCCESS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+      return { ...state };
+    case LOGIN_ERROR:
+      return {...state, loginError: action.data};
     default:
       return state;
   }

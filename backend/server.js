@@ -23,7 +23,10 @@ app.post('/auth/login', async (req, res) => {
   const user = await User.findOne({ email, password });
   if (user) return res.send('Login successful!');
 
-  res.status(401).send('Invalid email or password!');
+  res
+    .status(401)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .send('Invalid email or password!');
 });
 
 app.post('/auth/signup', async (req, res) => {
