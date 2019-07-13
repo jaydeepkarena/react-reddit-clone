@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const { User, validateUser } = require('./models/user');
+const jwt = require('jsonwebtoken');
 
 require('express-async-errors');
 
@@ -24,7 +25,11 @@ app.post('/auth/login', async (req, res) => {
 
   if (!user) return res.status(401).send('Invalid email or password!');
 
-  res.send(user);
+  const token = jwt.sign({ user }, 'MyPrivateKey');
+  console.log('TOKEN >>>>>>');
+  console.log(token);
+
+  res.send({ ...user, token });
 });
 
 app.post('/auth/signup', async (req, res) => {
