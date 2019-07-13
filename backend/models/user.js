@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 5,
+    maxlength: 255
+  },
   email: {
     type: String,
     required: true,
@@ -14,6 +21,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 255
+  },
+  token: {
+    type: String,
+    default: ''
   }
 });
 

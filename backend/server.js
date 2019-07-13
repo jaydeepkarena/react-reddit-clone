@@ -21,15 +21,14 @@ process.on('unhandledRejection', err => console.log(err));
 
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, password }).select('name email');
+  const user = await User.findOne({ email, password });
 
   if (!user) return res.status(401).send('Invalid email or password!');
 
-  const token = jwt.sign({ user }, 'MyPrivateKey');
-  console.log('TOKEN >>>>>>');
-  console.log(token);
+  user.token = jwt.sign({ user }, 'MyPrivateKey');
+  await user.save();
 
-  res.send({ ...user, token });
+  res.send(user);
 });
 
 app.post('/auth/signup', async (req, res) => {
