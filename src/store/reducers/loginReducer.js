@@ -8,10 +8,10 @@ const authenticateUser = (email, password) => {
     axios
       .post('http://localhost:5000/auth/login', { email, password })
       .then(data => {
-        dispatch(loginSuccessfull(data.data))
+        dispatch(loginSuccessfull(data.data));
       })
       .catch(err => {
-        dispatch(loginError(err));
+        dispatch(loginError(err.response.data));
       });
   };
 };

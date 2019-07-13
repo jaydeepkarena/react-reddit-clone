@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { LoginUser } from '../store/actions';
-import authenticateUser from '../store/reducers/loginReducer'
+import authenticateUser from '../store/reducers/loginReducer';
 
 const Login = props => {
   const emailRef = useRef('');
@@ -23,6 +23,7 @@ const Login = props => {
   return (
     <>
       <h2>Login</h2>
+      {props.loginError && <p> {props.loginError} </p>}
       <label htmlFor="email">Email:</label>
       <input type="text" name="email" id="email" ref={emailRef} />
       <label htmlFor="password">Password:</label>
@@ -34,12 +35,14 @@ const Login = props => {
 
 const mapStateToPros = state => ({
   currentUserId: state.data.currentUserId,
-  currentUserName: state.data.currentUserName
+  currentUserName: state.data.currentUserName,
+  loginRequested: state.data.loginRequested,
+  loginError: state.data.loginError
 });
 
 const mapDispatchToProps = dispatch => ({
   authenticateUser: (email, password) => {
-    dispatch(authenticateUser(email, password))
+    dispatch(authenticateUser(email, password));
   }
 });
 

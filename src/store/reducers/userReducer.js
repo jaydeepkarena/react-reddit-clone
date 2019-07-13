@@ -21,7 +21,7 @@ const userReducer = (state = initialState, action) => {
         currentUserEmail: action.email
       };
     case LOGIN_ERROR:
-      return { ...state, loginRequested: false, loginError: action.data };
+      return { ...state, loginRequested: false, loginError: action.error };
     default:
       return state;
   }
