@@ -1,4 +1,4 @@
-import { USER_LOGIN, SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../actionTypes';
+import { USER_LOGIN, SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from '../actionTypes';
 
 export function LoginUser(email, password) {
   return {
@@ -25,5 +25,11 @@ export function loginError(error) {
   return {
     type: LOGIN_ERROR,
     error
+  };
+}
+
+export function logout() {
+  return {
+    type: LOGOUT
   };
 }

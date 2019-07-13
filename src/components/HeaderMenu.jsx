@@ -3,6 +3,7 @@ import logo from '../assets/images/reddit_logo.svg';
 import './HeaderMenu.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../store/actions';
 
 const HeaderMenu = ({ id, name }) => {
   return (
@@ -13,9 +14,14 @@ const HeaderMenu = ({ id, name }) => {
           <span>Reddit</span>
         </div>
         {id ? (
-          <a href="/new-post" className="crate-post">
-            Create Post
-          </a>
+          <>
+            <a href="/new-post" className="crate-post">
+              Create Post
+            </a>
+            {/* <a href="" className="logout" onClick={logout}>
+              Logout
+            </a> */}
+          </>
         ) : (
           <>
             <Link to="/Login" className="login">
@@ -32,10 +38,12 @@ const HeaderMenu = ({ id, name }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  id: state.data.currentUserId,
-  name: state.data.currentUserName,
-  email: state.data.currentUserEmail
+const mapStateToProps = ({
+  data: { currentUserId: id, currentUserName: name, currentUserEmail: email }
+}) => ({
+  id,
+  name,
+  email
 });
 
 export default connect(mapStateToProps)(HeaderMenu);

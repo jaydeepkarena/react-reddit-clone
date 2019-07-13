@@ -1,4 +1,4 @@
-import { SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../actionTypes';
+import { SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from '../actionTypes';
 
 const initialState = {
   currentUserId: '',
@@ -22,6 +22,8 @@ const userReducer = (state = initialState, action) => {
       };
     case LOGIN_ERROR:
       return { ...state, loginRequested: false, loginError: action.error };
+    case LOGOUT:
+      return { ...state, currentUserId: '', currentUserName: 'Guest', currentUserEmail: '' };
     default:
       return state;
   }

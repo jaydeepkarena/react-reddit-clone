@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { LoginUser } from '../store/actions';
 import authenticateUser from '../store/reducers/loginReducer';
 
 const Login = props => {
