@@ -1,14 +1,6 @@
-import { USER_LOGIN, SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../actionTypes';
+import { SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../actionTypes';
 
 const initialState = {
-  users: {
-    '0': {
-      id: '0',
-      name: '',
-      email: '',
-      password: ''
-    }
-  },
   currentUserId: '',
   currentUserName: 'Guest',
   currentUserEmail: '',
@@ -21,10 +13,15 @@ const userReducer = (state = initialState, action) => {
     case SENT_LOGIN_REQUEST:
       return { ...state, loginRequested: true };
     case LOGIN_SUCCESS:
-      console.log('LOGIN SUCCESS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-      return { ...state };
+      return {
+        ...state,
+        loginRequested: false,
+        currentUserId: action.id,
+        currentUserName: action.name,
+        currentUserEmail: action.email
+      };
     case LOGIN_ERROR:
-      return {...state, loginError: action.data};
+      return { ...state, loginRequested: false, loginError: action.data };
     default:
       return state;
   }

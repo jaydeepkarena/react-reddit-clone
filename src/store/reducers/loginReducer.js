@@ -1,24 +1,17 @@
 import { sentLoginRequest, loginSuccessfull, loginError } from '../actions';
 import axios from 'axios';
 
-const authenticateUser = () => {
-  console.log('Inside authenticateUser - redux-thunk');
+const authenticateUser = (email, password) => {
   return (dispatch, getState) => {
-    console.log('Inside authenticateUser');
     dispatch(sentLoginRequest());
 
     axios
-      .post('http://localhost:5000/auth/login', {
-        email: 'test@gmail.com',
-        password: '12345'
-      })
+      .post('http://localhost:5000/auth/login', { email, password })
       .then(data => {
-        console.log(data);
-        // dispatch(loginSuccessfull)
+        dispatch(loginSuccessfull(data.data))
       })
       .catch(err => {
-        console.log(err);
-        // dispatch(loginError);
+        dispatch(loginError(err));
       });
   };
 };
