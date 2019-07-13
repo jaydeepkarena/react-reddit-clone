@@ -20,13 +20,11 @@ process.on('unhandledRejection', err => console.log(err));
 
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, password });
-  if (user) return res.send('Login successful!');
+  const user = await User.findOne({ email, password }).select('name email');
 
-  res
-    .status(401)
-    .setHeader('Access-Control-Allow-Origin', '*')
-    .send('Invalid email or password!');
+  if (!user) return res.status(401).send('Invalid email or password!');
+
+  res.send(user);
 });
 
 app.post('/auth/signup', async (req, res) => {
