@@ -21,7 +21,7 @@ process.on('unhandledRejection', err => console.log(err));
 
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, password });
+  const user = await User.findOne({ email, password }).select('name email');
 
   if (!user) return res.status(401).send('Invalid email or password!');
 
