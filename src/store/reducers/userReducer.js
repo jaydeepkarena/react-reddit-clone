@@ -9,9 +9,14 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
+  console.log('USER REDUCER >>>>>> ACTION');
+  console.log(action);
   switch (action.type) {
     case SENT_LOGIN_REQUEST:
-      return { ...state, loginRequested: true };
+      return {
+        ...state,
+        loginRequested: true
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -21,9 +26,19 @@ const userReducer = (state = initialState, action) => {
         currentUserEmail: action.email
       };
     case LOGIN_ERROR:
-      return { ...state, loginRequested: false, loginError: action.error };
+      return {
+        ...state,
+        loginRequested: false,
+        loginError: action.error
+      };
     case LOGOUT:
-      return { ...state, currentUserId: '', currentUserName: 'Guest', currentUserEmail: '' };
+      return {
+        ...state,
+        loginRequested: false,
+        currentUserId: '',
+        currentUserName: 'Guest',
+        currentUserEmail: ''
+      };
     default:
       return state;
   }

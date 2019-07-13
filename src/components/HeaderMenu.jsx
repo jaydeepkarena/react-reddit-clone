@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store/actions';
 
-const HeaderMenu = ({ id, name }) => {
+const HeaderMenu = ({ id, name, userLogout }) => {
   return (
     <>
       <div className="header-menu-container">
@@ -18,9 +18,9 @@ const HeaderMenu = ({ id, name }) => {
             <a href="/new-post" className="crate-post">
               Create Post
             </a>
-            {/* <a href="" className="logout" onClick={logout}>
+            <span className="logout" onClick={() => userLogout()}>
               Logout
-            </a> */}
+            </span>
           </>
         ) : (
           <>
@@ -46,4 +46,11 @@ const mapStateToProps = ({
   email
 });
 
-export default connect(mapStateToProps)(HeaderMenu);
+const mapDispatchToProps = dispatch => ({
+  userLogout: () => dispatch(logout())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderMenu);
