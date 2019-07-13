@@ -1,10 +1,25 @@
 import { sentLoginRequest, loginSuccessfull, loginError } from '../actions';
+import axios from 'axios';
 
-fetch('http://localhost:5000/auth/login', {
-  method: 'POST',
-  mode: 'no-cors',
-  headers: { 'Content-Type': 'application/json' },
-  body: { email: 'jaydeep7karena7@gmail.com', password: '12345' }
-}).then(d => console.log('d =>', d));
+const authenticateUser = () => {
+  console.log('Inside authenticateUser - redux-thunk');
+  return (dispatch, getState) => {
+    console.log('Inside authenticateUser');
+    dispatch(sentLoginRequest());
 
-export default userLogin;
+    axios
+      .post('http://localhost:5000/auth/login', {
+        email: 'test@gmail.com',
+        password: '12345'
+      })
+      .then(data => {
+        console.log(data);
+        // dispatch(loginSuccessfull)
+      })
+      .catch(err => {
+        console.log(err);
+        // dispatch(loginError);
+      });
+  };
+};
+export default authenticateUser;

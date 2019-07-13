@@ -2,11 +2,11 @@ import { USER_LOGIN, SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../a
 
 const initialState = {
   users: {
-    '123': {
-      id: 123,
-      name: 'jaydeep karena',
-      email: 'jaydeep7karena7@gmail.com',
-      password: '12345'
+    '0': {
+      id: '0',
+      name: '',
+      email: '',
+      password: ''
     }
   },
   currentUserId: '',
@@ -18,8 +18,6 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case USER_LOGIN:
-    //   return { ...state, currentUserId: 'Test', currentUserName: 'Test' };
     case SENT_LOGIN_REQUEST:
       return { ...state, loginRequested: true };
     case LOGIN_SUCCESS:
