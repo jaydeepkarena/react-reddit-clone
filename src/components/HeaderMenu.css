@@ -31,8 +31,13 @@
   padding-right: 5px;
 }
 
-.user-name, .crate-post, .login, .signup {
+.header-right-item {
   padding-right: 10px;
+}
+
+.logout{
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 a {

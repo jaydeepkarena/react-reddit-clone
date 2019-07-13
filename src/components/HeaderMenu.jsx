@@ -15,19 +15,19 @@ const HeaderMenu = ({ id, name, userLogout }) => {
         </div>
         {id ? (
           <>
-            <a href="/new-post" className="crate-post">
+            <a href="/new-post" className="crate-post header-right-item">
               Create Post
             </a>
-            <span className="logout" onClick={() => userLogout()}>
+            <span className="logout header-right-item" onClick={() => userLogout()}>
               Logout
             </span>
           </>
         ) : (
           <>
-            <Link to="/Login" className="login">
+            <Link to="/Login" className="login header-right-item">
               Login {id}
             </Link>
-            <Link to="/signup" className="signup">
+            <Link to="/signup" className="signup header-right-item">
               SignUp
             </Link>
           </>
