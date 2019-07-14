@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const { User, validateUser } = require('./models/user');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 require('express-async-errors');
 
@@ -11,6 +12,7 @@ mongoose
   .then(() => console.log('Successfully connected to MongoDb...'))
   .catch(err => console.log(err));
 
+app.use(cors());
 app.use(express.json());
 app.use(function(err, req, res, next) {
   console.log('ERRRORORORORORR : ', err);
