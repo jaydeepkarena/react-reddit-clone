@@ -1,4 +1,4 @@
-import { SENT_LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from '../actionTypes';
+import { LOADING, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from '../actionTypes';
 
 const initialState = {
   currentUserId: '',
@@ -12,7 +12,7 @@ const userReducer = (state = initialState, action) => {
   console.log('USER REDUCER >>>>>> ACTION');
   console.log(action);
   switch (action.type) {
-    case SENT_LOGIN_REQUEST:
+    case LOADING:
       return {
         ...state,
         loginRequested: true
@@ -35,6 +35,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loginRequested: false,
+        loginError: '',
         currentUserId: '',
         currentUserName: 'Guest',
         currentUserEmail: ''
