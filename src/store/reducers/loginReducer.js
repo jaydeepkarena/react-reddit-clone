@@ -1,8 +1,17 @@
+import Joi from '@hapi/joi';
 import { sentLoginRequest, loginSuccessfull, loginError } from '../actions';
 import axios from 'axios';
 
 const authenticateUser = (email, password) => {
   return (dispatch, getState) => {
+    // validate string
+    const { error } = validate(email, password);
+    if (error) {
+      console.log(error.details[0].message);
+      dispatch(loginError(error.details[0].message));
+      return;
+    }
+
     dispatch(sentLoginRequest());
 
     axios
@@ -15,4 +24,15 @@ const authenticateUser = (email, password) => {
       });
   };
 };
+
+const validate = (email, password) => {
+  const schema = {
+    email: Joi.string().required(),
+    password: Joi.string()
+      .min(5)
+      .max(255)
+  };
+  return Joi.validate({ email, password }, schema);
+};
+
 export default authenticateUser;
