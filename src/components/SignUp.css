@@ -1,5 +1,45 @@
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .error {
   border: 1px solid red;
   border-radius: 10px;
   padding: 10px 5px;
+  margin: 5px 0 5px 0;
 }
+
+.signup-items{
+  text-align: center;
+}
+
+.control-group{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.control-group label{
+ text-align: left;
+}
+
+.control-group input {
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.loader {
+  animation: App-logo-spin infinite 0.5s linear;
+  height: 40vmin;
+  pointer-events: none;
+ }
+
+ @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+ }
