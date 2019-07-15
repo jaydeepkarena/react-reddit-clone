@@ -24,10 +24,10 @@ const HeaderMenu = ({ id, name, userLogout }) => {
           </>
         ) : (
           <>
-            <Link to="/Login" className="login header-right-item">
+            <Link to="/Login" className="login-button header-right-item">
               Login {id}
             </Link>
-            <Link to="/signup" className="signup header-right-item">
+            <Link to="/signup" className="signup-button header-right-item">
               SignUp
             </Link>
           </>

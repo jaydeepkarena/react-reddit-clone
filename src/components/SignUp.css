@@ -1,8 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap'); /* for logo */
+@import url('https://fonts.googleapis.com/css?family=Boogaloo&display=swap'); /* for all headings */
+
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
+
 .signup {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: orange;
+  width: 100vw;
+  height: 93vh;
 }
+
 .error {
   border: 1px solid red;
   border-radius: 10px;
@@ -14,19 +25,37 @@
   text-align: center;
 }
 
+.signup-items h1 {
+  font-family: Boogaloo;
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+.signup-items button {
+  font-family: Boogaloo;
+  font-size: 1.5rem;
+}
+
 .control-group{
   display: flex;
   flex-direction: column;
   width: 400px;
+  margin-bottom: 15px;
 }
 
 .control-group label{
  text-align: left;
+ font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ color: rgb(49, 47, 47);
 }
 
 .control-group input {
-  padding: 7px;
-  border-radius: 5px;
+  padding: 15px 10px ;
+  border-radius: 10px;
+  font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  color: rgb(49, 47, 47);
 }
 
 .loader {
@@ -34,6 +63,15 @@
   height: 40vmin;
   pointer-events: none;
  }
+
+.signup-items button{
+  width: 100px;
+  height: 40px;
+}
+
+.signup-items button:first-of-type{
+  margin-right: 10px;
+}
 
  @keyframes App-logo-spin {
   from {

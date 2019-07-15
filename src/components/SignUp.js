@@ -52,6 +52,7 @@ const SignUp = props => {
     emailRef.current.value = '';
     passwordRef.current.value = '';
     confirmPasswordRef.current.value = '';
+    setError('');
   };
 
   const showErrors = () => {
