@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { User, validateUser } = require('./models/user');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const _ = require('lodash');
 
 require('express-async-errors');
 
@@ -36,18 +37,19 @@ app.post('/auth/login', async (req, res) => {
 app.post('/auth/signup', async (req, res) => {
   const { error } = validateUser(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  const { email, password } = req.body;
-  let user = await User.findOne({ email, password });
+
+  const { name, email, password } = req.body;
+  let user = await User.findOne({ email });
   if (user) return res.status(401).send('User already registered!');
 
   try {
-    user = new User({ email, password });
+    user = new User({ name, email, password });
     await user.save();
-    return res.send(user);
+    return res.send(_.pick(user, ['_id', 'name', 'email']));
   } catch (e) {
     console.log('ERRORORORR:', e);
+    return res.send(e);
   }
-  return res.send(user);
 });
 
 app.get('/auth/users', async (req, res) => {
