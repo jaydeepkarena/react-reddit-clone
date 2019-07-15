@@ -1,12 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import authenticateUser from '../store/reducers/loginReducer';
+import { loginError } from '../store/actions'
 
 const Login = props => {
   const emailRef = useRef('');
   const passwordRef = useRef('');
+  useEffect(() => {
+    props.clearLoginError('')
+  }, [])
 
   const Login = e => {
     e.preventDefault();
@@ -42,7 +46,8 @@ const mapStateToPros = state => ({
 const mapDispatchToProps = dispatch => ({
   authenticateUser: (email, password) => {
     dispatch(authenticateUser(email, password));
-  }
+  },
+  clearLoginError: (error) => dispatch(loginError(error))
 });
 
 export default connect(
