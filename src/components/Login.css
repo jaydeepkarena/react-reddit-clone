@@ -4,8 +4,8 @@
 input:focus, textarea:focus, select:focus{
   outline: none;
 }
-
 .login {
+
   display: flex;
   align-items: center;
   justify-content: center;
