@@ -1,5 +1,11 @@
 import React, { useRef, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import Joi from '@hapi/joi';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './SignUp.css';
 import loader from './../assets/images/logo.svg';
 
@@ -13,17 +19,12 @@ const SignUp = () => {
   const confirmPasswordRef = useRef('');
 
   const submit = () => {
-    const user = {
-      name: nameRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-      confirmPassword: confirmPasswordRef.current.value
-    };
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
 
-    console.log('name', nameRef.current.value);
-    console.log('email', emailRef.current.value);
-    console.log('password', passwordRef.current.value);
-    console.log('confirmPassword', confirmPasswordRef.current.value);
+    const user = { name, email, password, confirmPassword };
 
     setError('');
     const { error } = validate(user);
@@ -33,8 +34,17 @@ const SignUp = () => {
     }
 
     setLoading(true);
-    // call API
-    setLoading(false);
+    axios
+      .post('http://localhost:5000/auth/login', { name, email, password, confirmPassword })
+      .then(data => {
+        setLoading(false);
+        toast.success('Form reset successful!');
+        return <Redirect to="/login" />;
+      })
+      .catch(err => {
+        setLoading(false);
+        setError(err.response.data);
+      });
   };
 
   const reset = () => {
