@@ -26,14 +26,17 @@ process.on('unhandledRejection', err => console.log(err));
 
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, password }).select('name email');
+  const user = await User.findOne({ email }).select('name email password');
 
   if (!user) return res.status(401).send('Invalid email or password!');
+
+  const result = await bcrypt.compare(password, user.password);
+  if (!result) return res.status(401).send('Invalid email or password!');
 
   user.token = jwt.sign({ user }, 'MyPrivateKey');
   await user.save();
 
-  res.send(user);
+  res.send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 app.post('/auth/signup', async (req, res) => {
