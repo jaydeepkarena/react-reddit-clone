@@ -5,6 +5,8 @@ const { User, validateUser } = require('./models/user');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const _ = require('lodash');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 require('express-async-errors');
 
@@ -43,7 +45,10 @@ app.post('/auth/signup', async (req, res) => {
   if (user) return res.status(401).send('User already registered!');
 
   try {
-    user = new User({ name, email, password });
+    const encryptedPassword = await bcrypt.hash(password, saltRounds);
+    console.log(password);
+
+    user = new User({ name, email, password: encryptedPassword });
     await user.save();
     return res.send(_.pick(user, ['_id', 'name', 'email']));
   } catch (e) {

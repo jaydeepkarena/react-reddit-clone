@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import Joi from '@hapi/joi';
 import axios from 'axios';
