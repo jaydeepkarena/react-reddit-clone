@@ -23,6 +23,9 @@ input:focus, textarea:focus, select:focus{
 
 .signup-items{
   text-align: center;
+  border: 3px solid lightgray;
+  padding: 20px;
+  box-shadow: 1px 1px 10px 5px lightgray;
 }
 
 .signup-items h1 {
