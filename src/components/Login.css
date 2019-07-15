@@ -5,7 +5,7 @@ input:focus, textarea:focus, select:focus{
   outline: none;
 }
 
-.signup {
+.login {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,24 +14,17 @@ input:focus, textarea:focus, select:focus{
   height: 93vh;
 }
 
-.error {
-  border: 1px solid red;
-  border-radius: 10px;
-  padding: 10px 5px;
-  margin: 5px 0 5px 0;
-}
-
-.signup-items{
+.login-items{
   text-align: center;
 }
 
-.signup-items h1 {
+.login-items h1 {
   font-family: Boogaloo;
   font-size: 3rem;
   text-decoration: underline;
 }
 
-.signup-items button {
+.login-items button {
   font-family: Boogaloo;
   font-size: 1.5rem;
 }
@@ -58,19 +51,13 @@ input:focus, textarea:focus, select:focus{
   color: rgb(49, 47, 47);
 }
 
-.loader {
-  animation: App-logo-spin infinite 0.5s linear;
-  height: 40vmin;
-  pointer-events: none;
- }
-
-.signup-items button {
+.login-items button{
   width: 100px;
   height: 40px;
   border-radius: 10px;
 }
 
-.signup-items button:first-of-type{
+.login-items button:first-of-type{
   margin-right: 10px;
 }
 
