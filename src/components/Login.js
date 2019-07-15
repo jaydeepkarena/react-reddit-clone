@@ -1,16 +1,23 @@
 import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import authenticateUser from '../store/reducers/loginReducer';
-import { loginError } from '../store/actions'
+import { loginError } from '../store/actions';
 
 const Login = props => {
   const emailRef = useRef('');
   const passwordRef = useRef('');
   useEffect(() => {
-    props.clearLoginError('')
-  }, [])
+    props.clearLoginError('');
+  }, [props]);
+
+  useEffect(() => {
+    if (props.loginError) {
+      toast.error(props.loginError);
+    }
+  }, [props.loginError]);
 
   const Login = e => {
     e.preventDefault();
@@ -22,6 +29,8 @@ const Login = props => {
   };
 
   if (props.currentUserId) return <Redirect to="/" />;
+
+  // if (props.loginError) return toast.error(props.loginError);
 
   return (
     <>
@@ -47,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
   authenticateUser: (email, password) => {
     dispatch(authenticateUser(email, password));
   },
-  clearLoginError: (error) => dispatch(loginError(error))
+  clearLoginError: error => dispatch(loginError(error))
 });
 
 export default connect(
