@@ -1,16 +1,36 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import Joi from '@hapi/joi';
+import './SignUp.css';
 
 const SignUp = () => {
+  const [error, setError] = useState('');
+
   const nameRef = useRef('');
   const emailRef = useRef('');
   const passwordRef = useRef('');
   const confirmPasswordRef = useRef('');
 
   const submit = () => {
-    console.log(nameRef.current.value);
-    console.log(emailRef.current.value);
-    console.log(passwordRef.current.value);
-    console.log(confirmPasswordRef.current.value);
+    const user = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      confirmPassword: confirmPasswordRef.current.value
+    };
+
+    console.log('name', nameRef.current.value);
+    console.log('email', emailRef.current.value);
+    console.log('password', passwordRef.current.value);
+    console.log('confirmPassword', confirmPasswordRef.current.value);
+
+    setError('');
+    const { error } = validate(user);
+    if (error) {
+      setError(error.details[0].message);
+      return;
+    }
+
+    // call API
   };
 
   const reset = () => {
@@ -20,8 +40,13 @@ const SignUp = () => {
     confirmPasswordRef.current.value = '';
   };
 
+  const showErrors = () => {
+    if (error) return <div className="error"> {error} </div>;
+  };
+
   return (
     <>
+      {showErrors()}
       <h1 className="signup"> SignUp Component </h1>
       <div className="signup-items">
         <div className="control-group">
@@ -47,6 +72,25 @@ const SignUp = () => {
       </div>
     </>
   );
+};
+
+const validate = user => {
+  const schema = {
+    name: Joi.string()
+      .required()
+      .min(5)
+      .max(255),
+    email: Joi.email().required(),
+    password: Joi.string()
+      .required()
+      .min(5)
+      .max(255),
+    confirmPassword: Joi.string()
+      .valid(Joi.ref('password'))
+      .required()
+      .strict()
+  };
+  return Joi.validate(user, schema);
 };
 
 export default SignUp;
