@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './SignUp.css';
 import loader from './../assets/images/logo.svg';
 
-const SignUp = () => {
+const SignUp = props => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -35,11 +35,12 @@ const SignUp = () => {
 
     setLoading(true);
     axios
-      .post('http://localhost:5000/auth/login', { name, email, password, confirmPassword })
+      .post('http://localhost:5000/auth/signup', { name, email, password, confirmPassword })
       .then(data => {
+        console.log(data);
         setLoading(false);
-        toast.success('Form reset successful!');
-        return <Redirect to="/login" />;
+        toast.success('Signup successfull!');
+        props.history.push('/');
       })
       .catch(err => {
         setLoading(false);
