@@ -6,6 +6,7 @@ import App from '../App';
 import HeaderMenu from './HeaderMenu';
 import Login from './Login';
 import SignUp from './SignUp';
+import NewPost from './NewPost';
 import NotFound from './NotFound';
 
 toast.configure();
@@ -20,6 +21,7 @@ const Root = () => {
             <Route path="/" component={App} exact />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/new-post" component={NewPost} />
             <Route component={NotFound} />
           </Switch>
         </div>
