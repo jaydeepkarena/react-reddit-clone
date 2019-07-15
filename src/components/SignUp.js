@@ -5,6 +5,7 @@ import loader from './../assets/images/logo.svg';
 
 const SignUp = () => {
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const nameRef = useRef('');
   const emailRef = useRef('');
@@ -31,7 +32,9 @@ const SignUp = () => {
       return;
     }
 
+    setLoading(true);
     // call API
+    setLoading(false);
   };
 
   const reset = () => {
@@ -49,7 +52,9 @@ const SignUp = () => {
     <>
       <div className="signup">
         <div className="signup-items">
-          <img src={loader} alt="wait..." className="loader" height="100" width="100" />
+          {loading && (
+            <img src={loader} alt="wait..." className="loader" height="100" width="100" />
+          )}
           <h1> SignUp </h1>
           {showErrors()}
           <div className="control-group">
