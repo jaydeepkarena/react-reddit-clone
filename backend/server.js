@@ -11,16 +11,21 @@ const saltRounds = 10;
 const multer = require('multer');
 const fs = require('fs');
 const Post = require('./models/posts');
+const { GetNewFileName } = require('./helper');
 
 require('express-async-errors');
 
 mongoose
-  .connect('mongodb://localhost/react-reddit-clone', { useNewUrlParser: true })
+  .connect('mongodb://localhost/react-reddit-clone', {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  })
   .then(() => console.log('Successfully connected to MongoDb...'))
   .catch(err => console.log(err));
 
 app.use(cors());
-app.use(express.json());
+// app.use(express.json());
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function(err, req, res, next) {
   console.log('ERRRORORORORORR : ', err);
@@ -31,19 +36,24 @@ process.on('unhandledRejection', err => console.log(err));
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, 'uploads');
+    cb(null, 'uploads/');
   },
   filename: function(req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now());
+    cb(null, GetNewFileName(file.originalname));
   }
 });
 const upload = multer({ storage });
 
-app.post('/new-post', upload.single('picture'), (req, res) => {
-  const img = fs.readFileSync(req.file.path);
-  const encoded_image = img.toString('base64');
-  console.log(encoded_image);
-  res.send('Work in progress!');
+app.post('/new-post', upload.single('image'), (req, res) => {
+  // console.log('IMAGE >>>',req.file)
+  // console.log(`IMAGE PATH >>> ${req.file.path}`)
+  // const img = fs.readFileSync(req.file.path);
+  // const encoded_image = img.toString('base64');
+  // console.log(encoded_image);
+  console.log(`req.params >>>>`, req.params);
+  console.log(`req.file >>>>`, req.file);
+  if (req.file) return res.send('File uploaded Successfully!');
+  res.status(500).send('Oops! Something went wrong!');
 });
 
 app.post('/auth/login', async (req, res) => {
