@@ -49,7 +49,7 @@ const Login = props => {
           </div>
           <div className="control-group">
             <label htmlFor="password">Password:</label>
-            <input type="text" name="password" id="password" ref={passwordRef} />
+            <input type="password" name="password" id="password" ref={passwordRef} />
           </div>
           <button onClick={Login}>Login</button>
           <button onClick={reset}>Reset</button>
