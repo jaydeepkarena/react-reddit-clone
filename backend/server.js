@@ -8,10 +8,10 @@ const cors = require('cors');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const multer = require('multer');
 const fs = require('fs');
 const Post = require('./models/posts');
 const { GetNewFileName } = require('./helper');
+const formidable = require('formidable');
 
 require('express-async-errors');
 
@@ -25,33 +25,32 @@ mongoose
 
 app.use(cors());
 // app.use(express.json());
-// app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(function(err, req, res, next) {
-  console.log('ERRRORORORORORR : ', err);
-  next();
-});
+app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(function(err, req, res, next) {
+//   console.log('ERRRORORORORORR : ', err);
+//   next();
+// });
 
-process.on('unhandledRejection', err => console.log(err));
+// process.on('unhandledRejection', err => console.log(err));
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, GetNewFileName(file.originalname));
-  }
-});
-const upload = multer({ storage });
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, 'uploads/');
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, GetNewFileName(file.originalname));
+//   }
+// });
+// const upload = multer({ storage });
 
-app.post('/new-post', upload.single('image'), (req, res) => {
-  // console.log('IMAGE >>>',req.file)
-  // console.log(`IMAGE PATH >>> ${req.file.path}`)
-  // const img = fs.readFileSync(req.file.path);
-  // const encoded_image = img.toString('base64');
-  // console.log(encoded_image);
-  console.log(`req.params >>>>`, req.params);
-  console.log(`req.file >>>>`, req.file);
+app.post('/new-post', (req, res) => {
+  console.log('>>>> INSIDE new-post');
+  const form = new formidable.IncomingForm();
+  form.uploadDir = '/uploads';
+  form.parse(req, function(err, field, files) {
+    return res.send('file uploaded Successfully!');
+  });
   if (req.file) return res.send('File uploaded Successfully!');
   res.status(500).send('Oops! Something went wrong!');
 });

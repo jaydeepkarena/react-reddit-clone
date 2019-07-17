@@ -16,9 +16,8 @@ const postsReducer = (state = initialState, action) => {
       return { posts: [...state.posts, action.post], submittingPost: false, submitPostError: '' };
     case SUBMIT_POST_ERROR:
       return { ...state, submittingPost: false, submitPostError: action.error };
-
     default:
-      break;
+      return state;
   }
 };
 
