@@ -1,3 +1,21 @@
 {
-  "editor.folding": true
+  "editor.folding": true,
+  "files.exclude": {
+    "node_modules": false,
+    "backend/node_modules": false,
+    ".pnp": false,
+    "**/.pnp.js": false,
+    "coverage": false,
+    "build": false,
+    "**/.DS_Store": false,
+    "**/.env.local": false,
+    "**/.env.development.local": false,
+    "**/.env.test.local": false,
+    "**/.env.production.local": false,
+    "**/npm-debug.log*": false,
+    "**/yarn-debug.log*": false,
+    "**/yarn-error.log*": false,
+    "**/backend/node_modules": true,
+    "**/node_modules": true
+  }
 }
