@@ -16,8 +16,8 @@ const postSchema = new mongoose.Schema({
     default: ''
   },
   image: {
-    data: Buffer,
-    contentType: String
+    type: String,
+    required: false
   }
 });
 

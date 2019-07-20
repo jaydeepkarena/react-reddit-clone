@@ -23,9 +23,10 @@ mongoose
   .then(() => console.log('Successfully connected to MongoDb...'))
   .catch(err => console.log(`ERRRORORORORORR >>> `, err));
 
+app.use('/uploads', express.static('uploads'));
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function(err, req, res, next) {
   console.log('ERRRORORORORORR >>> ', err);
   next();
@@ -43,9 +44,17 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-app.post('/new-post', upload.single('avatar'), (req, res) => {
-  if (req.file) return res.send('File uploaded Successfully!');
-  res.status(500).send('Oops! Something went wrong!');
+app.post('/new-post', upload.single('avatar'), async (req, res) => {
+  console.log(req.body);
+  let image = '';
+  if (req.file) {
+    image = req.file.path;
+  }
+
+  const { user, title, description } = req.body;
+  let newPost = new Post({ user, title, description, image });
+  await newPost.save();
+  res.send(newPost);
 });
 
 app.post('/auth/login', async (req, res) => {
