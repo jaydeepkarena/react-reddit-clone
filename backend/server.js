@@ -9,7 +9,7 @@ const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const fs = require('fs');
-const Post = require('./models/posts');
+const { Post, validatePost } = require('./models/posts');
 const { GetNewFileName } = require('./helper');
 const multer = require('multer');
 
@@ -45,14 +45,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post('/new-post', upload.single('avatar'), async (req, res) => {
-  console.log(req.body);
   let image = '';
   if (req.file) {
     image = req.file.path;
   }
 
   const { user, title, description } = req.body;
-  let newPost = new Post({ user, title, description, image });
+  const post = { user, title, description, image };
+
+  const { error } = validatePost(post);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  let newPost = new Post(post);
   await newPost.save();
   res.send(newPost);
 });
