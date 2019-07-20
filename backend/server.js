@@ -44,7 +44,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-app.post('/new-post', upload.single('avatar'), async (req, res) => {
+app.post('/new-post', upload.single('image'), async (req, res) => {
+  console.log(`req.body >>>`)
+  console.log(req.body)
+  console.log(`req.file >>>`)
+  console.log(req.file)
   let image = '';
   if (req.file) {
     image = req.file.path;

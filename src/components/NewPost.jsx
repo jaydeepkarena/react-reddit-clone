@@ -8,22 +8,26 @@ const NewPost = props => {
   const [state, setState] = useState({
     title: '',
     description: '',
-    image: '',
-    user: ''
+    user: '',
+    image: ''
   });
 
   const createPost = e => {
     e.preventDefault();
 
+    const { title, description, user, image } = state;
+    var data = new FormData();
+    data.append('title', title);
+    data.append('description', description);
+    data.append('user', user);
+    data.append('image', image);
+
     fetch('http://localhost:5000/new-post', {
       method: 'POST',
-      mode:'cors',
-      body: JSON.stringify(state),
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+      body: data
     })
-      .then(res => res.json())
+      .then(response => response.json())
+      .then(data => console.log('SUCCESS'))
       .catch(err => console.log(`ERROR`, err));
   };
 
@@ -33,6 +37,7 @@ const NewPost = props => {
       user: props.currentUserId,
       [e.target.name]: e.target.value
     });
+    console.log(state);
   };
 
   if (!props.currentUserId) {
