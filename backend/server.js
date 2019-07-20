@@ -11,9 +11,9 @@ const saltRounds = 10;
 const fs = require('fs');
 const Post = require('./models/posts');
 const { GetNewFileName } = require('./helper');
-const formidable = require('formidable');
+const multer = require('multer');
 
-require('express-async-errors');
+// require('express-async-errors');
 
 mongoose
   .connect('mongodb://localhost/react-reddit-clone', {
@@ -21,36 +21,29 @@ mongoose
     useCreateIndex: true
   })
   .then(() => console.log('Successfully connected to MongoDb...'))
-  .catch(err => console.log(err));
+  .catch(err => console.log(`ERRRORORORORORR >>> `, err));
 
 app.use(cors());
-// app.use(express.json());
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(function(err, req, res, next) {
-//   console.log('ERRRORORORORORR : ', err);
-//   next();
-// });
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(function(err, req, res, next) {
+  console.log('ERRRORORORORORR >>> ', err);
+  next();
+});
 
-// process.on('unhandledRejection', err => console.log(err));
+process.on('unhandledRejection', err => console.log(err));
 
-// const storage = multer.diskStorage({
-//   destination: function(req, file, cb) {
-//     cb(null, 'uploads/');
-//   },
-//   filename: function(req, file, cb) {
-//     cb(null, GetNewFileName(file.originalname));
-//   }
-// });
-// const upload = multer({ storage });
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, GetNewFileName(file.originalname));
+  }
+});
+const upload = multer({ storage });
 
-app.post('/new-post', (req, res) => {
-  console.log('>>>> INSIDE new-post');
-  const form = new formidable.IncomingForm();
-  form.uploadDir = '/uploads';
-  form.parse(req, function(err, field, files) {
-    return res.send('file uploaded Successfully!');
-  });
+app.post('/new-post', upload.single('avatar'), (req, res) => {
   if (req.file) return res.send('File uploaded Successfully!');
   res.status(500).send('Oops! Something went wrong!');
 });
