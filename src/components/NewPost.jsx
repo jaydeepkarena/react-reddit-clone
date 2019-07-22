@@ -24,9 +24,17 @@ const NewPost = props => {
 
     fetch('http://localhost:5000/new-post', {
       method: 'POST',
-      body: data
+      body: data,
+      headers: {
+        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryerVl8pQe2JADwPxu'
+      }
     })
-      .then(response => response.json())
+      .then(response => {
+        console.log(`typeof response : ${typeof response}`);
+        console.log(`RESPONSE >>>`);
+        console.log(response);
+        return response.json();
+      })
       .then(data => console.log('SUCCESS'))
       .catch(err => console.log(`ERROR`, err));
   };
@@ -37,6 +45,7 @@ const NewPost = props => {
       user: props.currentUserId,
       [e.target.name]: e.target.value
     });
+    console.log(`STATE >>>`);
     console.log(state);
   };
 
