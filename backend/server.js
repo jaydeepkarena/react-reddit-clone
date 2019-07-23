@@ -14,6 +14,10 @@ const { GetNewFileName } = require('./helper');
 const multer = require('multer');
 
 // require('express-async-errors');
+const errorMiddleWare = (err, req, res, next) => {
+  console.log('ERRRORORORORORR >>> ', err);
+  next();
+};
 
 mongoose
   .connect('mongodb://localhost/react-reddit-clone', {
@@ -27,10 +31,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(function(err, req, res, next) {
-  console.log('ERRRORORORORORR >>> ', err);
-  next();
-});
+app.use(errorMiddleWare);
 
 process.on('unhandledRejection', err => console.log(err));
 
@@ -42,13 +43,13 @@ const storage = multer.diskStorage({
     cb(null, GetNewFileName(file.originalname));
   }
 });
-const upload = multer({ storage });
+const uploadSingleFile = multer({ storage }).single('image');
 
-app.post('/new-post', upload.single('image'), async (req, res) => {
-  console.log(`req.body >>>`)
-  console.log(req.body)
-  console.log(`req.file >>>`)
-  console.log(req.file)
+app.post('/new-post', uploadSingleFile, async (req, res) => {
+  // console.log(`req.body >>>`)
+  // console.log(req.body)
+  // console.log(`req.file >>>`)
+  // console.log(req.file)
   let image = '';
   if (req.file) {
     image = req.file.path;
