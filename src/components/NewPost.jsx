@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 import './NewPost.css';
 
@@ -9,7 +10,7 @@ const NewPost = props => {
     title: '',
     description: '',
     user: '',
-    image: ''
+    image: null
   });
 
   const createPost = e => {
@@ -22,20 +23,12 @@ const NewPost = props => {
     data.append('user', user);
     data.append('image', image);
 
-    fetch('http://localhost:5000/new-post', {
-      method: 'POST',
-      body: data,
-      headers: {
-        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryerVl8pQe2JADwPxu'
-      }
-    })
-      .then(response => {
-        console.log(`typeof response : ${typeof response}`);
-        console.log(`RESPONSE >>>`);
-        console.log(response);
-        return response.json();
-      })
-      .then(data => console.log('SUCCESS'))
+    console.log(`STATE >>>`);
+    console.log(state);
+
+    axios
+      .post('http://localhost:5000/new-post', data)
+      .then(response => console.log(response.data))
       .catch(err => console.log(`ERROR`, err));
   };
 
@@ -68,7 +61,12 @@ const NewPost = props => {
           />
           <div className="control-group">
             <span>Select image:</span>{' '}
-            <input type="file" name="image" accept="image/*" onChange={handleChange} />
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={e => setState({ ...state, image: e.target.files[0] })}
+            />
           </div>
           <div className="buttons">
             <input type="submit" value="Submit" onClick={createPost} />
