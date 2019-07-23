@@ -25,16 +25,14 @@ const NewPost = props => {
     data.append('user', user);
     data.append('image', image);
 
-    console.log('STATE >>>');
-    console.log(state);
-
     axios
       .post('http://localhost:5000/new-post', data)
       .then(response => {
-        console.log(response.data);
-        // setState(initialState);
+        props.history.push('/');
       })
-      .catch(err => console.log(`ERROR`, err));
+      .catch(err => {
+        console.log(`ERROR`, err);
+      });
   };
 
   const handleChange = e => {
