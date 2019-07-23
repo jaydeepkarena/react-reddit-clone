@@ -5,13 +5,15 @@ import axios from 'axios';
 
 import './NewPost.css';
 
+const initialState = {
+  title: '',
+  description: '',
+  user: '',
+  image: null
+};
+
 const NewPost = props => {
-  const [state, setState] = useState({
-    title: '',
-    description: '',
-    user: '',
-    image: null
-  });
+  const [state, setState] = useState(initialState);
 
   const createPost = e => {
     e.preventDefault();
@@ -23,12 +25,15 @@ const NewPost = props => {
     data.append('user', user);
     data.append('image', image);
 
-    console.log(`STATE >>>`);
+    console.log('STATE >>>');
     console.log(state);
 
     axios
       .post('http://localhost:5000/new-post', data)
-      .then(response => console.log(response.data))
+      .then(response => {
+        console.log(response.data);
+        // setState(initialState);
+      })
       .catch(err => console.log(`ERROR`, err));
   };
 
@@ -38,8 +43,6 @@ const NewPost = props => {
       user: props.currentUserId,
       [e.target.name]: e.target.value
     });
-    console.log(`STATE >>>`);
-    console.log(state);
   };
 
   if (!props.currentUserId) {
@@ -70,7 +73,7 @@ const NewPost = props => {
           </div>
           <div className="buttons">
             <input type="submit" value="Submit" onClick={createPost} />
-            <button>Discard</button>
+            <input type="reset" value="Reset" onClick={() => setState(initialState)} />
           </div>
         </div>
       </form>
