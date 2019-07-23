@@ -15,9 +15,9 @@ const HeaderMenu = ({ id, name, userLogout }) => {
         </div>
         {id ? (
           <>
-            <a href="/new-post" className="crate-post header-right-item">
+            <Link to="/new-post" className="crate-post header-right-item">
               Create Post
-            </a>
+            </Link>
             <span className="logout header-right-item" onClick={() => userLogout()}>
               Logout
             </span>

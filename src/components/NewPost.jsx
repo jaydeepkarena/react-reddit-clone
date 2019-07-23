@@ -27,7 +27,8 @@ const NewPost = props => {
 
     axios
       .post('http://localhost:5000/new-post', data)
-      .then(response => {
+      .then(res => {
+        console.log(res.data);
         props.history.push('/');
       })
       .catch(err => {
@@ -49,7 +50,7 @@ const NewPost = props => {
 
   return (
     <>
-      <form action="/new-post" method="post" enctype="multipart/form-data" onSubmit={createPost}>
+      <form action="/new-post" method="post" onSubmit={createPost}>
         <div className="new-post">
           <h1>New Post</h1>
           <input type="text" name="title" placeholder="Title" onChange={handleChange} />

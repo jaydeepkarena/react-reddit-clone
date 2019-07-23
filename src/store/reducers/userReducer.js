@@ -9,8 +9,8 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
-  console.log('USER REDUCER >>>>>> ACTION');
-  console.log(action);
+  // console.log('USER REDUCER >>>>>> ACTION');
+  // console.log(action);
   switch (action.type) {
     case LOADING:
       return {
