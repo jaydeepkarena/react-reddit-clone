@@ -1,4 +1,13 @@
-import { USER_LOGIN, LOADING, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from '../actionTypes';
+import {
+  USER_LOGIN,
+  LOADING,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  LOGOUT,
+  REQUEST_SENT_FOR_GETTING_POSTS,
+  RECEIVE_POSTS_SUCCESS,
+  RECEIVE_POSTS_ERROR
+} from '../actionTypes';
 
 export function LoginUser(email, password) {
   return {
@@ -31,5 +40,25 @@ export function loginError(error) {
 export function logout() {
   return {
     type: LOGOUT
+  };
+}
+
+export function requestPosts() {
+  return {
+    type: REQUEST_SENT_FOR_GETTING_POSTS
+  };
+}
+
+export function receivedPosts(posts) {
+  return {
+    type: RECEIVE_POSTS_SUCCESS,
+    posts
+  };
+}
+
+export function receivedError(error) {
+  return {
+    type: RECEIVE_POSTS_ERROR,
+    error
   };
 }
