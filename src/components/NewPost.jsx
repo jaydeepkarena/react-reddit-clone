@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import './NewPost.css';
 
@@ -29,6 +30,7 @@ const NewPost = props => {
       .post('http://localhost:5000/new-post', data)
       .then(res => {
         console.log(res.data);
+        toast.info('Post created successfully!');
         props.history.push('/');
       })
       .catch(err => {
