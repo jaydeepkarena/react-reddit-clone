@@ -59,11 +59,13 @@ const Login = props => {
   );
 };
 
-const mapStateToPros = state => ({
-  currentUserId: state.data.currentUserId,
-  currentUserName: state.data.currentUserName,
-  loginRequested: state.data.loginRequested,
-  loginError: state.data.loginError
+const mapStateToPros = ({
+  data: { currentUserId, currentUserName, loginRequested, loginError }
+}) => ({
+  currentUserId,
+  currentUserName,
+  loginRequested,
+  loginError
 });
 
 const mapDispatchToProps = dispatch => ({
