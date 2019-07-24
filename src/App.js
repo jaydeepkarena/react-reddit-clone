@@ -5,19 +5,19 @@ import { toast } from 'react-toastify';
 import './App.css';
 import getPosts from './store/reducers/getPosts';
 
-const App = props => {
+const App = ({ getPosts, posts, error, loading }) => {
   useEffect(() => {
-    props.getPosts();
-  },[]);
+    getPosts();
+  }, [getPosts]);
 
   useEffect(() => {
-    if (props.error) {
-      toast.error(props.error);
+    if (error) {
+      toast.error(error);
     }
-  }, [props.error]);
+  }, [error]);
 
-  if (props.loading) return <div className="loading">Loading...</div>;
-  if (props.error) return <div className="error">ERRROROROROR</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">ERRROROROROR</div>;
 
   return <div className="Posts">Posts found...</div>;
 };

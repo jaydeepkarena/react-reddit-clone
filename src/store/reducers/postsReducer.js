@@ -11,8 +11,6 @@ const initialState = {
 };
 
 const postsReducer = (state = initialState, action) => {
-  // console.log('POSTS-REDUCER.ACTION >>>');
-  // console.log(action);
   switch (action.type) {
     case REQUEST_SENT_FOR_GETTING_POSTS:
       return { ...state, loading: true, error: '' };

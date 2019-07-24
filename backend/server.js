@@ -39,9 +39,9 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: function(req, file, cb) {
-    console.log(`FILE >>>`);
-    console.log(file);
-    console.log(`FILE <<<`);
+    // console.log(`FILE >>>`);
+    // console.log(file);
+    // console.log(`FILE <<<`);
     cb(null, GetNewFileName(file.originalname));
   }
 });
@@ -89,7 +89,7 @@ app.post('/auth/signup', async (req, res) => {
 
   try {
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(password);
+    // console.log(password);
 
     user = new User({ name, email, password: encryptedPassword });
     await user.save();
@@ -102,7 +102,7 @@ app.post('/auth/signup', async (req, res) => {
 
 app.get('/auth/users', async (req, res) => {
   const users = await User.find({});
-  console.log(users);
+  // console.log(users);
   res.send(users);
 });
 
@@ -112,9 +112,9 @@ app.delete('/remove-all-post', async (req, res) => {
   // TODO: validate mongodb objectID
 
   const result = await Post.deleteMany({ user: req.body.user });
-  console.log(result);
+  // console.log(result);
   const message = `Deleted ${result.deletedCount} posts!`;
-  console.log(message);
+  // console.log(message);
   res.send(message);
 });
 
@@ -122,7 +122,6 @@ app.get('/posts', async (req, res) => {
   const posts = await Post.find()
     .sort({ timestamp: -1 })
     .limit(5);
-  console.log(posts);
   res.send(posts);
 });
 
