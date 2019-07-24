@@ -8,7 +8,6 @@ const cors = require('cors');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const fs = require('fs');
 const { Post, validatePost } = require('./models/posts');
 const { GetNewFileName } = require('./helper');
 const multer = require('multer');
@@ -46,10 +45,6 @@ const storage = multer.diskStorage({
 const uploadSingleFile = multer({ storage }).single('image');
 
 app.post('/new-post', uploadSingleFile, async (req, res) => {
-  // console.log(`req.body >>>`)
-  // console.log(req.body)
-  // console.log(`req.file >>>`)
-  // console.log(req.file)
   let image = '';
   if (req.file) {
     image = req.file.path;
@@ -106,6 +101,18 @@ app.get('/auth/users', async (req, res) => {
   const users = await User.find({});
   console.log(users);
   res.send(users);
+});
+
+app.delete('/remove-all-post', async (req, res) => {
+  if (!req.body.user) return res.status(401).send('User id not required!');
+
+  // TODO: validate mongodb objectID
+
+  const result = await Post.deleteMany({user: req.body.user});
+  console.log(result)
+  const message = `Deleted ${result.deletedCount} posts!`
+  console.log(message);
+  res.send(message);
 });
 
 const PORT = process.env.PORT || 5000;
