@@ -1,21 +1,25 @@
-import { SUBMITTING_POST, SUBMIT_POST_SUCCESS, SUBMIT_POST_ERROR } from '../actionTypes';
+import {
+  REQUEST_SENT_FOR_GETTING_POSTS,
+  RECEIVE_POSTS_SUCCESS,
+  RECEIVE_POSTS_ERROR
+} from '../actionTypes';
 
 const initialState = {
   posts: [],
-  submittingPost: false,
-  submitPostError: ''
+  loading: false,
+  error: ''
 };
 
 const postsReducer = (state = initialState, action) => {
-  console.log('USER REDUCER >>>>>> ACTION');
+  console.log('POSTS-REDUCER.ACTION >>>');
   console.log(action);
   switch (action.type) {
-    case SUBMITTING_POST:
-      return { ...state, submittingPost: true, submitPostError: '' };
-    case SUBMIT_POST_SUCCESS:
-      return { posts: [...state.posts, action.post], submittingPost: false, submitPostError: '' };
-    case SUBMIT_POST_ERROR:
-      return { ...state, submittingPost: false, submitPostError: action.error };
+    case REQUEST_SENT_FOR_GETTING_POSTS:
+      return { ...state, loading: true, error: '' };
+    case RECEIVE_POSTS_SUCCESS:
+      return { posts: action.posts, loading: false, error: '' };
+    case RECEIVE_POSTS_ERROR:
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }
