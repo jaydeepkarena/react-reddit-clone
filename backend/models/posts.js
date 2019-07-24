@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
-const _ = require('lodash')
+const _ = require('lodash');
 
 const postSchema = new mongoose.Schema({
   user: {
@@ -19,13 +19,17 @@ const postSchema = new mongoose.Schema({
   },
   image: {
     type: String
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now
   }
 });
 
 const Post = mongoose.model('post', postSchema);
 
 const validatePost = post => {
-  post =  _.pick(post, ['user', 'title', 'description'])
+  post = _.pick(post, ['user', 'title', 'description']);
 
   const schema = {
     user: Joi.string()
