@@ -118,11 +118,11 @@ app.delete('/remove-all-post', async (req, res) => {
   res.send(message);
 });
 
-app.get('/posts', async (req,res)=>{
-  const posts = await Post.find();
-  console.log(posts)
+app.get('/posts', async (req, res) => {
+  const posts = await Post.find().sort({ timestamp: -1 }).limit(5);
+  console.log(posts);
   res.send(posts);
-})
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Listening on ${PORT}...`));
