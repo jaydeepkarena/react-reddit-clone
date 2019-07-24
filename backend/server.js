@@ -39,6 +39,9 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: function(req, file, cb) {
+    console.log(`FILE >>>`);
+    console.log(file);
+    console.log(`FILE <<<`);
     cb(null, GetNewFileName(file.originalname));
   }
 });
@@ -108,9 +111,9 @@ app.delete('/remove-all-post', async (req, res) => {
 
   // TODO: validate mongodb objectID
 
-  const result = await Post.deleteMany({user: req.body.user});
-  console.log(result)
-  const message = `Deleted ${result.deletedCount} posts!`
+  const result = await Post.deleteMany({ user: req.body.user });
+  console.log(result);
+  const message = `Deleted ${result.deletedCount} posts!`;
   console.log(message);
   res.send(message);
 });
