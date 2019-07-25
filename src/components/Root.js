@@ -8,6 +8,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import NewPost from './NewPost';
 import NotFound from './NotFound';
+import './Root.css';
 
 toast.configure();
 

@@ -1,15 +1,3 @@
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-.main-container{
-  display: grid;
-  grid-template-rows: 40px 1fr;
-  height: 100vh;
-}
-
 .posts {
   margin-top: 5px;
   display: flex;
