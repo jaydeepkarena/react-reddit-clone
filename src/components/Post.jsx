@@ -1,6 +1,7 @@
 import React from 'react';
 import './Post.css';
 import moment from 'moment';
+import { imageURL } from '../utils/config';
 
 const Post = ({ post }) => {
   return (
@@ -8,7 +9,7 @@ const Post = ({ post }) => {
       <div className="post">
         <div className="post_title">{post.title}</div>
         <div className="post_description">{post.description}</div>
-        {post.image && <img src={post.image} alt="post_image" />}
+        {post.image && <img src={`${imageURL}${post.image}`} alt="post_image" />}
         <div className="post_date">{moment(post.timestamp).fromNow()}</div>
       </div>
     </>

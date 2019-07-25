@@ -11,6 +11,7 @@ const saltRounds = 10;
 const { Post, validatePost } = require('./models/posts');
 const { GetNewFileName } = require('./helper');
 const multer = require('multer');
+const path = require('path');
 
 // require('express-async-errors');
 const errorMiddleWare = (err, req, res, next) => {
@@ -39,9 +40,6 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: function(req, file, cb) {
-    // console.log(`FILE >>>`);
-    // console.log(file);
-    // console.log(`FILE <<<`);
     cb(null, GetNewFileName(file.originalname));
   }
 });
@@ -50,7 +48,8 @@ const uploadSingleFile = multer({ storage }).single('image');
 app.post('/new-post', uploadSingleFile, async (req, res) => {
   let image = '';
   if (req.file) {
-    image = req.file.path;
+    image = path.normalize(req.file.path);
+    console.log(`image path >>> ${image}`);
   }
 
   const { user, title, description } = req.body;

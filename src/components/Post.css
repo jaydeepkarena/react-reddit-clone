@@ -21,10 +21,13 @@
   letter-spacing: 1.1px;
   line-height: 1.5;
   margin: 5px;
+  word-wrap: break-word;
 }
 
-img {
-  margin-bottom: 5px;
+.post > img {
+  margin: 5px;
+  width: calc(100% - 10px);
+  height:400px;
 }
 
 .post_date {
