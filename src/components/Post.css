@@ -12,6 +12,7 @@
   font-weight: 100;
   font-size:15px;
   margin: 5px 0px 5px 5px;
+  color: rgb(63, 60, 60);
 }
 
 .post_description {
@@ -22,6 +23,7 @@
   line-height: 1.5;
   margin: 5px;
   word-wrap: break-word;
+  color: rgb(37, 35, 35);
 }
 
 .post > img {
@@ -35,5 +37,5 @@
   font-size: 10px;
   margin-left: 5px;
   margin-bottom: 5px;
-  color:darkgray;
+  color: rgb(37, 35, 35);
 }

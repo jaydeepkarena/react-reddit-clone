@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import API from '../utils/api'
+import API from '../utils/api';
 
 import './NewPost.css';
 
@@ -26,16 +26,17 @@ const NewPost = props => {
     data.append('user', user);
     data.append('image', image);
 
-    API
-      .post('new-post', data)
+    API.post('new-post', data)
       .then(res => {
         console.log(res.data);
         toast.info('Post created successfully!');
         props.history.push('/');
       })
       .catch(err => {
-        const errorMessage =err.response.data;
-        toast.error(errorMessage);
+        let errorMessage = '';
+        if (err.response && err.response.data) errorMessage = err.response.data;
+        else errorMessage = err;
+        toast.error(errorMessage.toString());
         console.log(`ERROR`, errorMessage);
       });
   };
