@@ -28,7 +28,6 @@ const NewPost = props => {
 
     API.post('new-post', data)
       .then(res => {
-        console.log(res.data);
         toast.info('Post created successfully!');
         props.history.push('/');
       })

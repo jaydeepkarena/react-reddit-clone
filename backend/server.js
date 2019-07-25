@@ -120,7 +120,7 @@ app.delete('/remove-all-post', async (req, res) => {
 app.get('/posts', async (req, res) => {
   const posts = await Post.find()
     .sort({ timestamp: -1 })
-    .limit(5);
+    .limit(99);
   res.send(posts);
 });
 

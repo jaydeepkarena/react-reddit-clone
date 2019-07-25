@@ -36,7 +36,6 @@ const SignUp = props => {
     API
       .post('auth/signup', { name, email, password, confirmPassword })
       .then(data => {
-        console.log(data);
         setLoading(false);
         toast.success('Signup successfull!');
         props.history.push('/');

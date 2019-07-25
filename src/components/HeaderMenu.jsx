@@ -5,13 +5,16 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store/actions';
 
-const HeaderMenu = ({ id, name, userLogout }) => {
+const HeaderMenu = ({ id, name, userLogout, history }) => {
+  const goHome = () => {
+    history.push('/');
+  };
   return (
     <>
       <div className="header-menu-container">
         <div className="logo">
-          <img src={logo} alt="logo here" className="reddit-logo" />
-          <span>Reddit</span>
+          <img src={logo} alt="logo here" className="reddit-logo" onClick={goHome} />
+          <span onClick={goHome}>Reddit</span>
         </div>
         {id ? (
           <>
