@@ -124,5 +124,13 @@ app.get('/posts', async (req, res) => {
   res.send(posts);
 });
 
+app.delete('/post', async (req, res) => {
+  if (!req.body._id) return res.status(400).send('Post id not found!');
+
+  const deletedPost = await Post.findByIdAndDelete(req.body._id);
+
+  res.send(deletedPost);
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Listening on ${PORT}...`));
