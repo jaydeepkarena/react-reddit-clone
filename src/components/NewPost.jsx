@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import API from '../utils/api'
 
 import './NewPost.css';
 
@@ -26,8 +26,8 @@ const NewPost = props => {
     data.append('user', user);
     data.append('image', image);
 
-    axios
-      .post('http://localhost:5000/new-post', data)
+    API
+      .post('new-post', data)
       .then(res => {
         console.log(res.data);
         toast.info('Post created successfully!');

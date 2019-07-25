@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 
 import Joi from '@hapi/joi';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import API from '../utils/api'
 
 import './SignUp.css';
 import loader from './../assets/images/logo.svg';
@@ -33,8 +33,8 @@ const SignUp = props => {
     }
 
     setLoading(true);
-    axios
-      .post('http://localhost:5000/auth/signup', { name, email, password, confirmPassword })
+    API
+      .post('auth/signup', { name, email, password, confirmPassword })
       .then(data => {
         console.log(data);
         setLoading(false);

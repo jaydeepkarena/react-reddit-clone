@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi';
 import { sentLoginRequest, loginSuccessfull, loginError } from '../actions';
-import axios from 'axios';
+import API from '../../utils/api'
 
 const authenticateUser = (email, password) => {
   return (dispatch, getState) => {
@@ -14,8 +14,8 @@ const authenticateUser = (email, password) => {
 
     dispatch(sentLoginRequest());
 
-    axios
-      .post('http://localhost:5000/auth/login', { email, password })
+    API
+      .post('auth/login', { email, password })
       .then(data => {
         dispatch(loginSuccessfull(data.data));
       })
