@@ -1,3 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,700&display=swap');
+
 .post {
   border: 1px solid lightgray;
+  border-radius: 1px;
+  width: 700px;
+  margin-bottom: 10px;
+}
+
+.post_title {
+  font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 100;
+  font-size:15px;
+  margin: 5px 0px 5px 5px;
+}
+
+.post_description {
+  font-family: Montserrat, Verdana, Geneva, Tahoma, 'sans-serif';
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 1.1px;
+  line-height: 1.5;
+  margin: 5px;
+}
+
+img {
+  margin-bottom: 5px;
+}
+
+.post_date {
+  font-family: Montserrat, Verdana, Geneva, Tahoma, 'sans-serif';
+  font-size: 10px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  color:darkgray;
 }

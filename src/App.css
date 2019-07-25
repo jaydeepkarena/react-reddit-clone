@@ -9,3 +9,10 @@
   grid-template-rows: 40px 1fr;
   height: 100vh;
 }
+
+.posts {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
