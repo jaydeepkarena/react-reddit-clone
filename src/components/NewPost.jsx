@@ -34,7 +34,9 @@ const NewPost = props => {
         props.history.push('/');
       })
       .catch(err => {
-        console.log(`ERROR`, err);
+        const errorMessage =err.response.data;
+        toast.error(errorMessage);
+        console.log(`ERROR`, errorMessage);
       });
   };
 

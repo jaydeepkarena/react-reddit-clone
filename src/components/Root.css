@@ -3,3 +3,9 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
+.header-menu-container {
+  position: fixed;
+  top: 0;
+  height: 40px;
+}
