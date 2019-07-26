@@ -6,16 +6,13 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store/actions';
 
 const HeaderMenu = ({ id, name, userLogout, history }) => {
-  const goHome = () => {
-    history.push('/');
-  };
   return (
     <>
       <div className="header-menu-container">
-        <div className="logo">
-          <img src={logo} alt="logo here" className="reddit-logo" onClick={goHome} />
-          <span onClick={goHome}>Reddit</span>
-        </div>
+        <Link to="/" className="logo">
+          <img src={logo} alt="logo here" className="reddit-logo" />
+          <span>Reddit</span>
+        </Link>
         {id ? (
           <>
             <Link to="/new-post" className="crate-post header-right-item">
