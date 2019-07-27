@@ -12,6 +12,7 @@ const { Post, validatePost } = require('./models/posts');
 const { GetNewFileName } = require('./helper');
 const multer = require('multer');
 const path = require('path');
+const Joi = require('./utility/Joi');
 
 // require('express-async-errors');
 const errorMiddleWare = (err, req, res, next) => {
@@ -124,8 +125,15 @@ app.get('/posts', async (req, res) => {
   res.send(posts);
 });
 
-app.delete('/post', async (req, res) => {
-  if (!req.body._id) return res.status(400).send('Post id not found!');
+app.delete('/post/:_id', async (req, res) => {
+  const r = Joi.validate({ _id: Joi.objectId() }, { _id: req.params._id });
+  console.log(r);
+  return res.send(r);
+  if (error) return res.status(401).send(error.details[0].message);
+  if (!req.params._id) return res.status(400).send('Please provide post id!');
+  const result = mongoose.Types.ObjectId(req.body._id);
+  console.log(`Result => `, result);
+  return res.send(result);
 
   const deletedPost = await Post.findByIdAndDelete(req.body._id);
 

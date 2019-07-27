@@ -41,14 +41,17 @@
 }
 
 .post_title + button {
-  background-color: rgb(218, 16, 16);
+  background-color: red;
   color:#fff;
   margin-left: auto;
   height: 90%;
   margin-right:5px;
-  width: 25px;
+  margin-top:5px;
+  padding: 5px;
+  width: auto;
   font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
+  border-radius: 5px;
+
 }
 
 .post_title_group {

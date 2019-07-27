@@ -8,14 +8,14 @@ import API from '../utils/api';
 
 const Post = ({ post, currentUserId }) => {
   const deletePost = async _id => {
-    const result = await API.delete('post', { id: _id });
+    const result = await API.delete(`post_id/${_id}`);
     console.log(`DELETE POST RESULT >>>`);
     console.log(result);
   };
 
   const deleteButton = () => {
     if (currentUserId === post.user) {
-      return <button onClick={() => deletePost(post._id)}>X</button>;
+      return <button className="delete-button" onClick={() => deletePost(post._id)}>Delete</button>;
     }
     return null;
   };

@@ -16,6 +16,6 @@
     "**/yarn-debug.log*": false,
     "**/yarn-error.log*": false,
     "**/backend/node_modules": true,
-    "**/node_modules": true
+    "**/node_modules": false
   }
 }
