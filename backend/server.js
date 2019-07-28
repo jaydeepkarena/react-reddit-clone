@@ -126,18 +126,22 @@ app.get('/posts', async (req, res) => {
 });
 
 app.delete('/post/:_id', async (req, res) => {
-  const r = Joi.validate({ _id: Joi.objectId() }, { _id: req.params._id });
-  console.log(r);
-  return res.send(r);
-  if (error) return res.status(401).send(error.details[0].message);
-  if (!req.params._id) return res.status(400).send('Please provide post id!');
-  const result = mongoose.Types.ObjectId(req.body._id);
-  console.log(`Result => `, result);
-  return res.send(result);
+  if (!req.params._id) {
+    return res.status(400).send('Please provide post id!');
+  }
 
-  const deletedPost = await Post.findByIdAndDelete(req.body._id);
+  const _id = req.params._id;
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(401).send('Invalid post id!');
+  }
 
-  res.send(deletedPost);
+  const post = await Post.findById(_id);
+  if (!post) {
+    res.status(404).send('Post not found with the given id!');
+  }
+
+  await post.remove();
+  res.send(post);
 });
 
 const PORT = process.env.PORT || 5000;
