@@ -12,7 +12,7 @@ const { Post, validatePost } = require('./models/posts');
 const { GetNewFileName } = require('./helper');
 const multer = require('multer');
 const path = require('path');
-const Joi = require('./utility/Joi');
+const { isValidMongoDbObjectId } = require('./utility/utils');
 
 // require('express-async-errors');
 const errorMiddleWare = (err, req, res, next) => {
@@ -68,10 +68,10 @@ app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email }).select('name email password');
 
-  if (!user) return res.status(401).send('Invalid email or password!');
+  if (!user) return res.status(400).send('Invalid email or password!');
 
   const result = await bcrypt.compare(password, user.password);
-  if (!result) return res.status(401).send('Invalid email or password!');
+  if (!result) return res.status(400).send('Invalid email or password!');
 
   user.token = jwt.sign({ user }, 'MyPrivateKey');
   await user.save();
@@ -85,7 +85,7 @@ app.post('/auth/signup', async (req, res) => {
 
   const { name, email, password } = req.body;
   let user = await User.findOne({ email });
-  if (user) return res.status(401).send('User already registered!');
+  if (user) return res.status(400).send('User already registered!');
 
   try {
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
@@ -107,7 +107,12 @@ app.get('/auth/users', async (req, res) => {
 });
 
 app.delete('/remove-all-post', async (req, res) => {
-  if (!req.body.user) return res.status(401).send('User id not required!');
+  if (!req.body.user) return res.status(400).send('User id not required!');
+
+  const user = req.body.user;
+  if (!isValidMongoDbObjectId(user)) {
+    return res.status(400).status('Provide valid user id!');
+  }
 
   // TODO: validate mongodb objectID
 
@@ -126,22 +131,28 @@ app.get('/posts', async (req, res) => {
 });
 
 app.delete('/post/:_id', async (req, res) => {
+  let responseObje = {
+    success: false
+  };
   if (!req.params._id) {
-    return res.status(400).send('Please provide post id!');
+    responseObje = { ...responseObje, error: 'Please provide post id!' };
+    return res.status(400).send(responseObje);
   }
 
   const _id = req.params._id;
-  if (!mongoose.Types.ObjectId.isValid(_id)) {
-    return res.status(401).send('Invalid post id!');
+  if (!isValidMongoDbObjectId(_id)) {
+    responseObje = { ...responseObje, error: 'Invalid post id!' };
+    return res.status(400).send(responseObje);
   }
 
   const post = await Post.findById(_id);
   if (!post) {
-    res.status(404).send('Post not found with the given id!');
+    responseObje = { ...responseObje, error: 'Post not found with the given id!' };
+    res.status(404).send(responseObje);
   }
 
   await post.remove();
-  res.send(post);
+  res.send({ success: true });
 });
 
 const PORT = process.env.PORT || 5000;
