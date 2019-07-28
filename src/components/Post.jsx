@@ -1,21 +1,37 @@
 import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { RemovePost } from '../store/actions';
+import { toast } from 'react-toastify';
 
 import './Post.css';
 import { imageURL } from '../utils/config';
 import API from '../utils/api';
 
-const Post = ({ post, currentUserId }) => {
+const Post = ({ post, currentUserId, RemovePost }) => {
   const deletePost = async _id => {
-    const result = await API.delete(`post_id/${_id}`);
-    console.log(`DELETE POST RESULT >>>`);
-    console.log(result);
+    try {
+      const {
+        data: { success }
+      } = await API.delete(`post/${_id}`);
+      if (success) {
+        RemovePost(_id);
+        toast.success('Post deleted successfully!');
+      }
+    } catch (err) {
+      console.log(`ERRRRROR>>>>>`);
+      console.log(err.response.data);
+      toast.error(`Oops, something went wrong!`);
+    }
   };
 
   const deleteButton = () => {
     if (currentUserId === post.user) {
-      return <button className="delete-button" onClick={() => deletePost(post._id)}>Delete</button>;
+      return (
+        <button className="delete-button" onClick={() => deletePost(post._id)}>
+          Delete
+        </button>
+      );
     }
     return null;
   };
@@ -40,4 +56,11 @@ const mapStateToPros = (state, props) => ({
   post: props.post
 });
 
-export default connect(mapStateToPros)(Post);
+const mapDispatchToProps = dispatch => ({
+  RemovePost: id => dispatch(RemovePost(id))
+});
+
+export default connect(
+  mapStateToPros,
+  mapDispatchToProps
+)(Post);

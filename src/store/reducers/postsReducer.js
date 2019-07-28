@@ -1,7 +1,8 @@
 import {
   REQUEST_SENT_FOR_GETTING_POSTS,
   RECEIVE_POSTS_SUCCESS,
-  RECEIVE_POSTS_ERROR
+  RECEIVE_POSTS_ERROR,
+  REMOVE_POST
 } from '../actionTypes';
 
 const initialState = {
@@ -18,6 +19,8 @@ const postsReducer = (state = initialState, action) => {
       return { posts: action.posts, loading: false, error: '' };
     case RECEIVE_POSTS_ERROR:
       return { ...state, loading: false, error: action.error };
+    case REMOVE_POST:
+      return { ...state, posts: state.posts.filter(post => post._id !== action._id) };
     default:
       return state;
   }

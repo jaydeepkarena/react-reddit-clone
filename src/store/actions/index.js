@@ -6,7 +6,8 @@ import {
   LOGOUT,
   REQUEST_SENT_FOR_GETTING_POSTS,
   RECEIVE_POSTS_SUCCESS,
-  RECEIVE_POSTS_ERROR
+  RECEIVE_POSTS_ERROR,
+  REMOVE_POST
 } from '../actionTypes';
 
 export function LoginUser(email, password) {
@@ -60,5 +61,12 @@ export function receivedError(error) {
   return {
     type: RECEIVE_POSTS_ERROR,
     error
+  };
+}
+
+export function RemovePost(_id) {
+  return {
+    type: REMOVE_POST,
+    _id
   };
 }
