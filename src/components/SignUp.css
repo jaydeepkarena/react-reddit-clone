@@ -9,9 +9,9 @@ input:focus, textarea:focus, select:focus{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: orange;
-  width: 100vw;
-  height: 93vh;
+  background-color: rgb(253, 246, 245);
+  margin-top: 40px;
+  height: calc(100vh - 40px);
 }
 
 .error {

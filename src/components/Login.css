@@ -5,13 +5,12 @@ input:focus, textarea:focus, select:focus{
   outline: none;
 }
 .login {
-
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: orange;
-  width: 100vw;
-  height: 93vh;
+  background-color: rgb(253, 246, 245);
+  height: calc(100vh - 40px);
+  margin-top: 40px;
 }
 
 .login-items{
