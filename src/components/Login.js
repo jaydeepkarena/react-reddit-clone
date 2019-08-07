@@ -49,7 +49,9 @@ const Login = props => {
           </div>
           <div className="control-group">
             <label htmlFor="password">Password:</label>
-            <input type="password" name="password" id="password" ref={passwordRef} />
+            <input type="password" name="password" id="password" ref={passwordRef}
+              onKeyDown={ e => e.key === "Enter" && Login()  }
+            />
           </div>
           <button onClick={Login}>Login</button>
           <button onClick={reset}>Reset</button>
