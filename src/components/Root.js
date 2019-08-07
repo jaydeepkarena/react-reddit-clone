@@ -8,6 +8,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import NewPost from './NewPost';
 import NotFound from './NotFound';
+import Profile from './Profile'
 import './Root.css';
 
 toast.configure();
@@ -24,6 +25,7 @@ const Root = () => {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={SignUp} />
               <Route path="/new-post" component={NewPost} />
+              <Route path="/u/:userid" component={Profile} />
               <Route component={NotFound} />
             </Switch>
           </div>

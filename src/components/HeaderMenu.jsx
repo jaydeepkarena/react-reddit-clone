@@ -32,7 +32,7 @@ const HeaderMenu = ({ id, name, userLogout, history }) => {
             </Link>
           </>
         )}
-        <div className="user-name">Welcome, {name} </div>
+        <Link className="user-name" to=`/u/${name}`>Welcome, {name} </Link>
       </div>
     </>
   );
