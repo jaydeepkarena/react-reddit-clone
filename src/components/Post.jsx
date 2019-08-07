@@ -3,6 +3,8 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { RemovePost } from '../store/actions';
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import './Post.css';
 import { imageURL } from '../utils/config';
@@ -28,9 +30,12 @@ const Post = ({ post, currentUserId, RemovePost }) => {
   const deleteButton = () => {
     if (currentUserId === post.user) {
       return (
-        <button className="delete-button" onClick={() => deletePost(post._id)}>
-          Delete
-        </button>
+          <div className="delete-button">
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => deletePost(post._id)}
+            />
+          </div>
       );
     }
     return null;

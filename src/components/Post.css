@@ -48,17 +48,17 @@
   color: rgb(112, 105, 105);
 }
 
-.post_title + button {
-  background-color: red;
-  color:#fff;
+.post_title + .delete-button {
+  /* background-color: red; */
+  color:red;
   margin-left: auto;
-  height: 90%;
+  /* height: 100%; */
   margin-right:5px;
   margin-top:5px;
   padding: 5px;
-  width: auto;
+  /* width: auto; */
   font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 
 }
 
