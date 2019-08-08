@@ -19,8 +19,8 @@
 .logo {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   margin-right: auto;
+  margin-left: 20px;
   font-size: 2rem;
   font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-transform: capitalize;
@@ -44,4 +44,12 @@
 
 a {
   color :white;
+}
+
+.reddit-logo + span {
+  margin-left: 5px;
+}
+
+.clickable {
+  cursor: pointer;
 }

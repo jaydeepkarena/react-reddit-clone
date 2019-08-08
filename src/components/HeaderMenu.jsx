@@ -10,7 +10,7 @@ const HeaderMenu = ({ id, name, userLogout, history }) => {
   const getUserName = () => {
     if (id) {
       return (
-        <Link className="user-name" to={`/u/${name}`}>
+        <Link className="user-name clickable" to={`/u/${name}`}>
           {welComeText}
         </Link>
       );
