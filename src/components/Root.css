@@ -11,8 +11,8 @@
 }
 
 .app-body {
-  top: 40px;
   height: calc(100%-40px);
+  margin-top: 45px;
 }
 
 .clickable {
