@@ -59,7 +59,7 @@
   /* width: auto; */
   font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* border-radius: 5px; */
-
+  cursor: pointer;
 }
 
 .post_title_group {

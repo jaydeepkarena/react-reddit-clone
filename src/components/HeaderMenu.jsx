@@ -2,10 +2,22 @@ import React from 'react';
 import logo from '../assets/images/reddit_logo.svg';
 import './HeaderMenu.css';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { logout } from '../store/actions';
 
 const HeaderMenu = ({ id, name, userLogout, history }) => {
+  const welComeText = `Welcome, ${name}`;
+  const getUserName = () => {
+    if (id) {
+      return (
+        <Link className="user-name" to={`/u/${name}`}>
+          {welComeText}
+        </Link>
+      );
+    }
+    return <div className="user-name"> {welComeText} </div>;
+  };
+
   return (
     <>
       <div className="header-menu-container">
@@ -18,9 +30,9 @@ const HeaderMenu = ({ id, name, userLogout, history }) => {
             <Link to="/new-post" className="crate-post header-right-item">
               Create Post
             </Link>
-            <span className="logout header-right-item" onClick={() => userLogout()}>
+            <Link className="logout header-right-item" onClick={userLogout} to="/">
               Logout
-            </span>
+            </Link>
           </>
         ) : (
           <>
@@ -32,9 +44,7 @@ const HeaderMenu = ({ id, name, userLogout, history }) => {
             </Link>
           </>
         )}
-        <Link className="user-name" to={`/u/${name}`}>
-          Welcome, {name}{' '}
-        </Link>
+        {getUserName()}
       </div>
     </>
   );
