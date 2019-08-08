@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/images/reddit_logo.svg';
-import './HeaderMenu.css';
+import './HeaderMenu.scss';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { logout } from '../store/actions';
