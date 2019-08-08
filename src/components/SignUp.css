@@ -10,8 +10,7 @@ input:focus, textarea:focus, select:focus{
   align-items: center;
   justify-content: center;
   background-color: rgb(253, 246, 245);
-  margin-top: 40px;
-  height: calc(100vh - 40px);
+  height: 100%;
 }
 
 .error {

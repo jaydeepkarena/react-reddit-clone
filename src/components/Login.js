@@ -34,8 +34,6 @@ const Login = props => {
 
   if (props.currentUserId) return <Redirect to="/" />;
 
-  // if (props.loginError) return toast.error(props.loginError);
-
   return (
     <>
       <div className="login">
