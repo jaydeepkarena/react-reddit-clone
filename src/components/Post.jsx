@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import './Post.css';
+import './Post.scss';
 import { imageURL } from '../utils/config';
 import API from '../utils/api';
 
