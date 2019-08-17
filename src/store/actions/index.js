@@ -23,12 +23,13 @@ export function sentLoginRequest() {
   };
 }
 
-export function loginSuccessfull({ _id: id, name, email }) {
+export function loginSuccessfull({ _id: id, name, email, avatar }) {
   return {
     type: LOGIN_SUCCESS,
     id,
     name,
-    email
+    email,
+    avatar
   };
 }
 export function loginError(error) {

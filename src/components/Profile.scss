@@ -1,3 +1,18 @@
-div {
+.profile {
+  width: 700px;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
 
+  .control-group {
+    border: 1px solid red;
+    width: auto;
+    height: auto;
+  }
+
+  .img {
+    border-radius: 5px;
+  }
 }

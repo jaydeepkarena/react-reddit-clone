@@ -4,7 +4,6 @@ import API from '../../utils/api'
 
 const authenticateUser = (email, password) => {
   return (dispatch, getState) => {
-    // validate string
     const { error } = validate(email, password);
     if (error) {
       console.log(error.details[0].message);

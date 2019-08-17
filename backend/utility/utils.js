@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path')
 
-const profileImagePlaceholder = 'default_profile_image.png';
-const defaultProfileImage = `./uploads/${profileImagePlaceholder}`;
-const assetProfileImage = `./assets/${profileImagePlaceholder}`;
+const avatarPlaceHolder = 'default_avatar.png';
+const defaultAvatarImage = `./uploads/${avatarPlaceHolder}`;
+const assetAvatar = `./assets/${avatarPlaceHolder}`;
 
 const fileExists = file => {
   return new Promise((resolve, reject) => {
@@ -19,18 +19,18 @@ const fileExists = file => {
 };
 
 module.exports.setDefaultProfileImage = async () => {
-  if (!(await fileExists(assetProfileImage))) {
-    console.log(`Profile image not found in Assets!`);
+  if (!(await fileExists(assetAvatar))) {
+    console.log(`Default avatar not found in Assets!`);
     return;
   }
 
-  if (await fileExists(defaultProfileImage)) {
+  if (await fileExists(defaultAvatarImage)) {
     return;
   }
 
-  fs.copyFile(assetProfileImage, defaultProfileImage, err => console.log(err));
+  fs.copyFile(assetAvatar, defaultAvatarImage, err => console.log(err));
 };
 
 module.exports.isValidMongoDbObjectId = id => mongoose.Types.ObjectId.isValid(id);
-module.exports.defaultProfileImage = path.join('uploads', profileImagePlaceholder);
+module.exports.defaultAvatar = path.join('uploads', avatarPlaceHolder);
 module.exports.fileExists = fileExists;

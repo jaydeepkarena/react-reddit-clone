@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
-const { defaultProfileImage } = require('../utility/utils');
+const { defaultAvatar } = require('../utility/utils');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -27,9 +27,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-  profile_img: {
+  avatar: {
     type: String,
-    default: defaultProfileImage
+    default: defaultAvatar
   }
 });
 

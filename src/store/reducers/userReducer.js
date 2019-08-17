@@ -4,6 +4,7 @@ const initialState = {
   currentUserId: '',
   currentUserName: 'Guest',
   currentUserEmail: '',
+  avatar: '',
   loginRequested: false,
   loginError: ''
 };
@@ -23,7 +24,8 @@ const userReducer = (state = initialState, action) => {
         loginRequested: false,
         currentUserId: action.id,
         currentUserName: action.name,
-        currentUserEmail: action.email
+        currentUserEmail: action.email,
+        avatar: action.avatar
       };
     case LOGIN_ERROR:
       return {
@@ -38,7 +40,8 @@ const userReducer = (state = initialState, action) => {
         loginError: '',
         currentUserId: '',
         currentUserName: 'Guest',
-        currentUserEmail: ''
+        currentUserEmail: '',
+        avatar: ''
       };
     default:
       return state;
