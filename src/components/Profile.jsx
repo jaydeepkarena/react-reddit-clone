@@ -8,7 +8,16 @@ const Profile = props => {
     return <Link to="/login">Login to continue</Link>;
   }
 
-  return <div> Profile Component of {props.match.params.userid} </div>;
+  return (<>
+  <div className="profile">
+    <div className="profile_image">
+      <img src="" alt="profile" />
+        {props.match.params.userid}
+        <br />
+        {props.id}
+    </div>
+  </div>
+  </>);
 };
 
 const mapStateToProps = state => ({
