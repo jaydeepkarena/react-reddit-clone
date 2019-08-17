@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
+const path = require('path')
 
 const profileImagePlaceholder = 'default_profile_image.png';
 const defaultProfileImage = `./uploads/${profileImagePlaceholder}`;
@@ -31,7 +32,5 @@ module.exports.setDefaultProfileImage = async () => {
 };
 
 module.exports.isValidMongoDbObjectId = id => mongoose.Types.ObjectId.isValid(id);
-
-module.exports.defaultProfileImage = assetProfileImage;
-
+module.exports.defaultProfileImage = path.join('uploads', profileImagePlaceholder);
 module.exports.fileExists = fileExists;

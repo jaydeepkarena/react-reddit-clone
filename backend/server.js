@@ -62,7 +62,7 @@ app.post('/new-post', uploadSingleFile, async (req, res) => {
 
   let newPost = new Post(post);
   await newPost.save();
-  res.send(newPost);
+  res.send(newPost);  
 });
 
 app.post('/auth/login', async (req, res) => {

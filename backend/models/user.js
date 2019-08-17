@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
+const { defaultProfileImage } = require('../utility/utils');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -28,7 +29,7 @@ const userSchema = new mongoose.Schema({
   },
   profile_img: {
     type: String,
-    default: ''
+    default: defaultProfileImage
   }
 });
 
@@ -54,7 +55,6 @@ const validateUser = user => {
   };
   return Joi.validate(user, schema);
 };
-
 
 module.exports.User = userModel;
 module.exports.validateUser = validateUser;
