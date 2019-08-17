@@ -1,4 +1,5 @@
 import { LOADING, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from '../actionTypes';
+import { imageURL } from '../../utils/config';
 
 const initialState = {
   currentUserId: '',
@@ -25,7 +26,7 @@ const userReducer = (state = initialState, action) => {
         currentUserId: action.id,
         currentUserName: action.name,
         currentUserEmail: action.email,
-        avatar: action.avatar
+        avatar: `${imageURL}${action.avatar}`
       };
     case LOGIN_ERROR:
       return {

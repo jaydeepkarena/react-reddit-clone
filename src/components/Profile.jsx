@@ -19,7 +19,7 @@ const Profile = props => {
     <>
       <div className="profile">
         <div className="control-group">
-          <img src="" alt="profile" className="profile_image" width="150" height="150" />
+          <img src={props.avatar} alt="profile" className="profile_image" width="150" height="150" />
         </div>
         <div className="control-group">
           <span className="profile_name"> {props.name}</span>
@@ -40,7 +40,8 @@ const Profile = props => {
 const mapStateToProps = ({ data }) => ({
   id: data.currentUserId,
   name: data.currentUserName,
-  email: data.currentUserEmail
+  email: data.currentUserEmail,
+  avatar: data.avatar
 });
 
 export default connect(mapStateToProps)(Profile);
