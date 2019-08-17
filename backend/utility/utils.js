@@ -1,36 +1,37 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
 
-const fileExists = path => {
-  fs.access(path, fs.constants.F_OK, err => {
-    return new Promise((res, rej) => {
+const profileImagePlaceholder = 'default_profile_image.png';
+const defaultProfileImage = `./uploads/${profileImagePlaceholder}`;
+const assetProfileImage = `./assets/${profileImagePlaceholder}`;
+
+const fileExists = file => {
+  return new Promise((resolve, reject) => {
+    fs.access(file, fs.constants.F_OK, err => {
       if (err) {
-        rej(err);
+        console.log(`FILE NOT FOUND: ${file}`);
+        resolve(false);
       }
-      res(true);
+      resolve(true);
     });
   });
 };
 
-const defaultProfileName = 'default_profile_image.png';
-const profileImage = `./assets/${defaultProfileName}`;
-const defaultProfileImagePath = `../uploads/${defaultProfileName}`;
-
 module.exports.setDefaultProfileImage = async () => {
-  console.log(`fileExists(profileImage) : ${fileExists(profileImage)}`);
-  if (!(await fileExists(profileImage))) {
-    console.log(`Default profile image not found in assets!`);
+  if (!(await fileExists(assetProfileImage))) {
+    console.log(`Profile image not found in Assets!`);
     return;
   }
-  if (fileExists(defaultProfileImagePath)) {
-    console.log(`Default profile image available in uploads!`);
+
+  if (await fileExists(defaultProfileImage)) {
     return;
   }
-  console.log(`copy...`);
+
+  fs.copyFile(assetProfileImage, defaultProfileImage, err => console.log(err));
 };
 
 module.exports.isValidMongoDbObjectId = id => mongoose.Types.ObjectId.isValid(id);
 
-module.exports.defaultProfileImage = profileImage;
+module.exports.defaultProfileImage = assetProfileImage;
 
 module.exports.fileExists = fileExists;
