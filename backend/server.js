@@ -12,7 +12,29 @@ const { Post, validatePost } = require('./models/posts');
 const { GetNewFileName } = require('./helper');
 const multer = require('multer');
 const path = require('path');
-const { isValidMongoDbObjectId } = require('./utility/utils');
+const { isValidMongoDbObjectId, setDefaultProfileImage } = require('./utility/utils');
+
+// setDefaultProfileImage();
+
+const fs = require('fs');
+
+const file = './assets/default_profile_image.png';
+
+const fileExists = (path, fn) => {
+  fs.access(file, fs.constants.F_OK, err => {
+    if (err) return console.log('FILE NOT FOUND');
+    fn();
+  })
+}
+
+fileExists(file, ()=> console.log(`file exists`));
+
+// if (
+//   fs.exists('./assets/default_profile_image.png') &&
+//   !fs.exists('./uploads/default_profile_image.png')
+// ) {
+//   fs.copyFile('./assets/default_profile_image.png', './uploads');
+// }
 
 // require('express-async-errors');
 const errorMiddleWare = (err, req, res, next) => {
@@ -115,9 +137,7 @@ app.delete('/remove-all-post', async (req, res) => {
   // TODO: validate mongodb objectID
 
   const result = await Post.deleteMany({ user: req.body.user });
-  // console.log(result);
   const message = `Deleted ${result.deletedCount} posts!`;
-  // console.log(message);
   res.send(message);
 });
 

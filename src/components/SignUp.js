@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import Joi from '@hapi/joi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import API from '../utils/api'
+import API from '../utils/api';
 
 import './SignUp.css';
 import loader from './../assets/images/logo.svg';
@@ -33,8 +33,7 @@ const SignUp = props => {
     }
 
     setLoading(true);
-    API
-      .post('auth/signup', { name, email, password, confirmPassword })
+    API.post('auth/signup', { name, email, password, confirmPassword })
       .then(data => {
         setLoading(false);
         toast.success('Signup successfull!');
@@ -94,6 +93,7 @@ const SignUp = props => {
 const validate = user => {
   const schema = {
     name: Joi.string()
+      .alphanum()
       .required()
       .min(5)
       .max(255),
