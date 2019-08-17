@@ -50,7 +50,6 @@ app.post('/new-post', uploadSingleFile, async (req, res) => {
   let image = '';
   if (req.file) {
     image = path.normalize(req.file.path);
-    console.log(`image path >>> ${image}`);
   }
 
   const { user, title, description } = req.body;
@@ -89,7 +88,6 @@ app.post('/auth/signup', async (req, res) => {
 
   try {
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
-    // console.log(password);
 
     user = new User({ name, email, password: encryptedPassword });
     await user.save();

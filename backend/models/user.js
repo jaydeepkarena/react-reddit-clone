@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String,
     default: ''
+  },
+  profile_img: {
+    type: String,
+    default: ''
   }
 });
 
