@@ -62,12 +62,12 @@ app.post('/new-post', uploadSingleFile, async (req, res) => {
 
   let newPost = new Post(post);
   await newPost.save();
-  res.send(newPost);  
+  res.send(newPost);
 });
 
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email }).select('name email password');
+  const user = await User.findOne({ email }).select('name email password avatar');
 
   if (!user) return res.status(400).send('Invalid email or password!');
 
@@ -77,7 +77,7 @@ app.post('/auth/login', async (req, res) => {
   user.token = jwt.sign({ user }, 'MyPrivateKey');
   await user.save();
 
-  res.send(_.pick(user, ['_id', 'name', 'email']));
+  res.send(_.pick(user, ['_id', 'name', 'email', 'avatar']));
 });
 
 app.post('/auth/signup', async (req, res) => {
