@@ -1,18 +1,48 @@
 .profile {
-  width: 700px;
-  height: auto;
-  margin-top: 10px;
-  margin-bottom: 0px;
-  margin-left: auto;
+  width: 500px;
   margin-right: auto;
+  margin-left: auto;
 
-  .control-group {
+  #profile-image-selector {
+    display: none;
     border: 1px solid red;
-    width: auto;
-    height: auto;
+    margin-top: 100px;
   }
 
-  .img {
-    border-radius: 5px;
+  .control-group:nth-child(3) {
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 30px;
+  }
+
+  .profile_name {
+    font-family: Boogaloo;
+    font-size: 1.5rem;
+    color: rgb(102, 49, 226);
+    text-transform: uppercase;
+  }
+
+  img {
+    border-radius: 2%;
+  }
+
+  #profile_email {
+    height: 20px;
+  }
+
+  .profile_buttons {
+    display: flex;
+    flex-direction: row;
+    height: 2rem;
+    justify-content: flex-start;
+
+    button {
+      margin-left: 10px;
+      padding: 0px 10px;
+      border-radius: 0px;
+      font-size: 1rem;
+      color: rgb(59, 57, 57);
+      font-family: 'Fredoka One', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      cursor: pointer;
+    }
   }
 }

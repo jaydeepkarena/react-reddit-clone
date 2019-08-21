@@ -10,27 +10,41 @@ const Profile = props => {
     return <Link to="/login">Login to continue</Link>;
   }
 
+  const handleEmailChange = (e) =>{
+    console.log(e.name)
+  }
+
   const update = () => {};
-  const reset = () => {
-    emailRef.current.value = '';
-  };
 
   return (
     <>
       <div className="profile">
+        <input type="file" name="profile-image-selector" id="profile-image-selector"/>
         <div className="control-group">
-          <img src={props.avatar} alt="profile" className="profile_image" width="150" height="150" />
+          <img
+            src={props.avatar}
+            alt="profile"
+            className="profile_image"
+            width="150"
+            height="150"
+          />
         </div>
         <div className="control-group">
           <span className="profile_name"> {props.name}</span>
         </div>
         <div className="control-group">
-          <label htmlFor="profile_email" />
-          <input type="text" name="profile_email" id="profile_email" ref={emailRef} />
+          <label htmlFor="profile_email">Email: </label>
+          <input
+            type="text"
+            name="profile_email"
+            id="profile_email"
+            ref={emailRef}
+            value={props.email}
+            onChange={handleEmailChange}
+          />
         </div>
-        <div className="control-group">
-          <button onClick={update}>Login</button>
-          <button onClick={reset}>Reset</button>
+        <div className="control-group profile_buttons">
+          <button onClick={update}>Update</button>
         </div>
       </div>
     </>
