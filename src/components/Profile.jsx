@@ -10,16 +10,16 @@ const Profile = props => {
     return <Link to="/login">Login to continue</Link>;
   }
 
-  const handleEmailChange = (e) =>{
-    console.log(e.name)
-  }
+  const handleEmailChange = e => {
+    console.log(e.name);
+  };
 
   const update = () => {};
 
   return (
     <>
       <div className="profile">
-        <input type="file" name="profile-image-selector" id="profile-image-selector"/>
+        <input type="file" name="profile-image-selector" id="profile-image-selector" />
         <div className="control-group">
           <img
             src={props.avatar}

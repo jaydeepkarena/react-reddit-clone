@@ -1,6 +1,6 @@
 {
   "editor.folding": true,
-  "editor.lineNumbers": "relative",
+  "editor.lineNumbers": "off",
   "files.exclude": {
     "node_modules": false,
     "backend/node_modules": false,

@@ -77,7 +77,7 @@ app.post('/auth/login', async (req, res) => {
   user.token = jwt.sign({ user }, 'MyPrivateKey');
   await user.save();
 
-  res.send(_.pick(user, ['_id', 'name', 'email', 'avatar']));
+  res.send(_.pick(user, ['_id', 'name', 'email', 'avatar', 'token']));
 });
 
 app.post('/auth/signup', async (req, res) => {
