@@ -1,17 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './Profile.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const Profile = props => {
-  const emailRef = useRef(props.email);
+  const [email, setEmail] = useState(props.email)
+  const emailRef = useRef(email);
 
   if (!props.id) {
     return <Link to="/login">Login to continue</Link>;
   }
 
   const handleEmailChange = e => {
-    console.log(e.name);
+    setEmail()
   };
 
   const update = () => {};
@@ -39,7 +40,7 @@ const Profile = props => {
             name="profile_email"
             id="profile_email"
             ref={emailRef}
-            value={props.email}
+            value={email}
             onChange={handleEmailChange}
           />
         </div>
